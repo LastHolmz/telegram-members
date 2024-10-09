@@ -1,4 +1,3 @@
-
 "use client";
 import { AlignJustify } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,7 +6,6 @@ import {
   SheetContent,
   SheetDescription,
   SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
@@ -17,8 +15,10 @@ const ActionButtons = () => {
     <div>
       <div className="md:hidden">
         <Sheet>
-          <SheetTrigger aria-label="sidebar-toggler-button">
-            <AlignJustify aria-label="bars icon that triggers the sidebar" className="mt-2" />
+          <SheetTrigger asChild aria-label="sidebar-toggler-button">
+            <Button variant={"ghost"} size={"icon"}>
+              <AlignJustify aria-label="bars icon that triggers the sidebar" />
+            </Button>
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>
@@ -39,7 +39,9 @@ const ActionButtons = () => {
         <Button aria-label="login button" variant="ghost" className="text-md">
           Sign in
         </Button>
-        <Button aria-label="get started button" className="text-md bg-blue-500">Get Started</Button>
+        <Button aria-label="get started button" className="text-md bg-blue-500">
+          Get Started
+        </Button>
       </div>
     </div>
   );

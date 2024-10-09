@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 const FifthSection = () => {
   return (
     <section className="md:py-20 p-10">
@@ -11,9 +13,10 @@ const FifthSection = () => {
           your business.
         </div>
 
-        <button aria-label="contact sales button" className="bg-blue-500 text-white px-6 py-3 md:w-1/4 mt-5 rounded-lg">
+        <Button aria-label="contact sales Button" className="mt-4" size={"lg"}>
+          {" "}
           Contact Sales
-        </button>
+        </Button>
       </div>
     </section>
   );

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 const features = [
   {
@@ -54,7 +55,7 @@ const SecondSection = () => {
     <div className="">
       <div className=" md:flex-row flex-col items-center flex  justify-center pb-10">
         <div className="p-5 justify-center md:w-1/3">
-          <div className=" bg-gradient-to-r  from-blue-800  to-green-300 bg-clip-text text-transparent text-4xl md:text-6xl font-bold pb-10 ">
+          <div className=" bg-gradient-to-r  from-primary/100 to-gradaint/80 bg-clip-text text-transparent text-4xl md:text-6xl font-bold pb-10 ">
             From startup to enterprise, Bird is built for every type of
             business.
           </div>
@@ -62,12 +63,9 @@ const SecondSection = () => {
             Built for all businesses and communities, Bird is the only platform
             you need to grow your business.
           </div>
-          <button
-            aria-label="get started button"
-            className="bg-blue-500 text-white p-4 justify-center flex md:w-1/3 rounded-lg hover:bg-blue-600"
-          >
+          <Button size={"lg"} aria-label="get started Button">
             Get Started
-          </button>
+          </Button>
         </div>
 
         <video className="rounded-xl md:w-2/5 p-4 md:p-0 " autoPlay muted loop>

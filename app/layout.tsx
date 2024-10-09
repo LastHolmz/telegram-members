@@ -7,8 +7,9 @@ const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Bird App",
-  description: "Bird app is a landing page template for buisness and ecommerce applications",
-  keywords: 'bird app'
+  description:
+    "Bird app is a landing page template for buisness and ecommerce applications",
+  keywords: "bird app",
 };
 
 export default function RootLayout({
