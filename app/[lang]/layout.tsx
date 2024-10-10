@@ -13,27 +13,34 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-export function generateImageMetadata({
-  params: { lang },
-}: {
-  params: { lang: Lang };
-}): Metadata {
-  if (lang === "ar") {
-    return {
-      title: "القالب 1",
-      description:
-        "قالب 1 هو قالب صفحة هبوط للأعمال والتطبيقات التجارية والتجارة الإلكترونية",
-      keywords: ["الابتكار التقني", "القالب 1"],
-    };
-  }
+// export function generateImageMetadata({
+//   params,
+// }: {
+//   params: { lang?: Lang };
+// }): Metadata {
+//   const lang = params.lang;
 
-  return {
-    title: "Template 1",
-    description:
-      "Template 1 app is a landing page template for business and ecommerce applications",
-    keywords: ["Alebtkar Altqni", "Template 1"],
-  };
-}
+//   return lang === "ar"
+//     ? {
+//         title: "القالب 1",
+//         description:
+//           "قالب 1 هو قالب صفحة هبوط للأعمال والتطبيقات التجارية والتجارة الإلكترونية",
+//         keywords: ["الابتكار التقني", "القالب 1"],
+//       }
+//     : {
+//         title: "Template 1",
+//         description:
+//           "Template 1 app is a landing page template for business and ecommerce applications",
+//         keywords: ["Alebtkar Altqni", "Template 1"],
+//       };
+// }
+
+export const metadata: Metadata = {
+  title: "القالب 1",
+  description:
+    "قالب 1 هو قالب صفحة هبوط للأعمال والتطبيقات التجارية والتجارة الإلكترونية",
+  keywords: ["الابتكار التقني", "القالب 1"],
+};
 
 export default async function RootLayout({
   children,
