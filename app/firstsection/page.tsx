@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 const Firstsection = () => {
   return (
-    <section className="md:py-20 py-16 bg-gradient-to-r from gray-00 to-gray-200 spacey-10">
-      <div className="container mx-auto text-center mt-10">
+    <section className="md:py-20 py-16 relative flex justify-center items-center bg-gradient-to-r min-h-screen from gray-00 to-gray-200 spacey-10">
+      <div className="container z-50 mx-auto text-center mt-10">
         <div className="text-6xl flex justify-center font-bold md:px-20 pb-10 text-gradient bg-gradient-to-r from-primary to-gradaint bg-clip-text text-transparent">
           Build a brand and start selling in seconds
         </div>
@@ -24,12 +25,6 @@ const Firstsection = () => {
           >
             Learn More
           </Button>
-        </div>
-
-        <div className="pt-10">
-          <video className="rounded-xl" autoPlay muted loop>
-            <source src="/content/video-3.mp4" type="video/mp4" />
-          </video>
         </div>
       </div>
     </section>

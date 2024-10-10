@@ -36,12 +36,10 @@ const ActionButtons = () => {
         </Sheet>
       </div>
       <div className="hidden md:flex md:space-x-4 ">
-        <Button aria-label="login button" variant="ghost" className="text-md">
+        <Button aria-label="login button" variant="ghost">
           Sign in
         </Button>
-        <Button aria-label="get started button" className="text-md bg-blue-500">
-          Get Started
-        </Button>
+        <Button aria-label="get started button">Get Started</Button>
       </div>
     </div>
   );

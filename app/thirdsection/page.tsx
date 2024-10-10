@@ -1,60 +1,50 @@
 import Image from "next/image";
+import { CiShop } from "react-icons/ci";
+import { FaShieldAlt } from "react-icons/fa";
+import { HiOutlineColorSwatch } from "react-icons/hi";
+import { SiStatista } from "react-icons/si";
 
 const ThirdSection = () => {
   return (
-    <section className="flex p-10 flex-col md:flex-row md:justify-evenly">
-      <div className="flex-col md:flex-row gap-6 md:px-10 flex">
-        <div className="md:w-2/3 w-full">
-          <video className="rounded-xl" autoPlay muted loop>
-            <source src="/content/video-4.mp4" type="video/mp4" />
-          </video>
+    <section className="flex p-10 flex-col md:flex-row text-center md:text-start-row md:justify-evenly">
+      <div className="flex-col lg:flex-row justify-center items-center gap-6 md:px-10 flex">
+        <div className="md:w-1/3 w-full">
+          <Image src={"/content/bg2.png"} alt={"bg"} width={600} height={600} />{" "}
         </div>
 
-        <div className="flex-col border p-4 rounded-xl md:w-2/5">
-          <div className="text-4xl flex justify-center text-center md:text-6xl bg-gradient-to-l  from-yellow-300  to-blue-300 bg-clip-text font-bold text-transparent ">
+        <div className="flex-col  p-4 rounded-xl md:w-2/3">
+          <h3 className="text-xl flex justify-center text-center md:text-3xl bg-gradient-to-l  from-primary  to-gradaint/80 bg-clip-text font-bold text-transparent ">
             Fully Customizable eCommerce
-          </div>
+          </h3>
 
-          <div className="md:px-20 space-y-6 flex-col items-center justify-center">
-            <div className="text-lg pt-10 flex gap-4">
-              <Image
-                src="/images/icon-store.png"
-                alt="feature-1"
-                width={70}
-                height={70}
-                className=" object-contain"
-              />
-              <div className="flex flex-col gap-2">
+          <div className="md:px-20 space-y-6 flex-col items-center w-full justify-center">
+            <div className="text-lg pt-10 flex justify-center items-center flex-col md:flex-row text-center md:text-start gap-4">
+              <div className="text-primary bg-primary/20 px-2 py-1 rounded-md">
+                <CiShop size={48} />
+              </div>
+
+              <div>
                 Choose from a variety of store templates to get started. And
                 customize your store to fit your brand.
               </div>
             </div>
 
-            <div className="flex-col">
-              <div className="text-lg flex items-center gap-5">
-                <Image
-                  src="/images/icon-product.png"
-                  alt="feature-1"
-                  width={70}
-                  height={70}
-                  className=" object-contain"
-                />
+            <div className="text-lg flex justify-center items-center gap-4">
+              <div className="text-lg flex flex-col md:flex-row text-center md:text-start items-center gap-5">
+                <div className="text-primary bg-primary/20 px-2 py-1 rounded-md">
+                  <HiOutlineColorSwatch size={48} />
+                </div>
                 <div>
                   Add unlimited products and variations. And manage your
                   inventory with ease.
                 </div>
               </div>
             </div>
-
-            <div className="flex-col">
-              <div className="text-lg flex items-center gap-5">
-                <Image
-                  src="/images/icon-analytics.png"
-                  alt="feature-1"
-                  width={70}
-                  height={70}
-                  className=" object-contain"
-                />
+            <div className="text-lg flex justify-center items-center gap-4">
+              <div className="text-lg flex-col md:flex-row text-center md:text-start flex items-center gap-5">
+                <div className="text-primary bg-primary/20 px-2 py-1 rounded-md">
+                  <SiStatista size={48} />
+                </div>
                 <div>
                   Gain valuable insights into your customers and products with
                   our analytics tools.
@@ -63,14 +53,10 @@ const ThirdSection = () => {
             </div>
 
             <div className="flex-col">
-              <div className="text-lg flex items-center gap-5">
-                <Image
-                  src="/images/icon-shield.png"
-                  alt="feature-1"
-                  width={70}
-                  height={70}
-                  className=" object-contain"
-                />
+              <div className="text-lg flex-col md:flex-row text-center md:text-start flex items-center gap-5">
+                <div className="text-primary bg-primary/20 px-2 py-1 rounded-md">
+                  <FaShieldAlt size={48} />
+                </div>
                 <div>
                   Best in class security to protect your data and your
                   customers.

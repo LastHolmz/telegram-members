@@ -24,19 +24,17 @@ const features = [
 
 const Pricing = () => {
   return (
-    <section className="flex flex-col justify-center items-center">
-      <div className=" text-4xl text-center md:text-6xl font-bold bg-gradient-to-r from-black dark:from-white dark:to-gray-500 to-gray-500 bg-clip-text text-transparent md:pb-10">
+    <section className="flex flex-col justify-center items-center max-w-full">
+      <h3 className=" text-4xl text-center md:text-6xl font-bold bg-gradient-to-r from-primary   to-gradaint/80 bg-clip-text text-transparent md:pb-10">
         Pricing
-        <div className="text-2xl text-center md:text-4xl font-bold md:py-10">
-          Simple and transparent pricing plans for all businesses.
-        </div>
-      </div>
+      </h3>
+      <div>Simple and transparent pricing plans for all businesses.</div>
 
-      <div className="md:flex">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3">
         {features.map((feature, index) => (
           <div key={index} className="p-4">
-            <div className=" grid justify-center items-center gap-4 border rounded-xl p-4 w-96 h-96">
-              <div className="text-2xl text-black pb-4">{feature.name}</div>
+            <div className=" grid justify-center items-start gap-4 bg-card rounded-xl p-4 min-h-96 max-w-full">
+              <div className="text-2xl pb-4">{feature.name}</div>
               <div className="text-xl ">{feature.price}</div>
               <div className="text-xl ">{feature.fees}</div>
               <div className="text-xl">{feature.description}</div>
