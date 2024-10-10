@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import * as React from "react";
@@ -16,6 +14,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import LangRenderer from "../lang";
 
 const components: { title: string; description: string }[] = [
   {
@@ -51,10 +50,15 @@ const components: { title: string; description: string }[] = [
 
 export function NavigationBar() {
   return (
-    <NavigationMenu aria-label="dropdown-menu">
-      <NavigationMenuList aria-label="dropdown-menu-list" className="p-6 hidden md:flex md:space-x-3">
+    <NavigationMenu className=" flex-1 w-full" aria-label="dropdown-menu">
+      <NavigationMenuList
+        aria-label="dropdown-menu-list"
+        className="p-6 hidden  md:flex gap-4"
+      >
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Getting Started</NavigationMenuTrigger>
+          <NavigationMenuTrigger>
+            <LangRenderer en={`Get Started`} ar={`لنبدء`} />
+          </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
@@ -87,7 +91,9 @@ export function NavigationBar() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+          <NavigationMenuTrigger>
+            <LangRenderer en={`Components`} ar={`المكونات`} />
+          </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {components?.map((component) => (
@@ -99,9 +105,9 @@ export function NavigationBar() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link href="/docs" legacyBehavior passHref>
+          <Link href="/" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Documentation
+              <LangRenderer en={`Documentation`} ar={`الشرح`} />
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>

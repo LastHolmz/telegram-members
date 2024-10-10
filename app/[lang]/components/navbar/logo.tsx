@@ -1,9 +1,12 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 
 const Logo = () => {
+  const { lang } = useParams();
   return (
-    <div>
+    <Link href={`/${lang}`} scroll>
       <Image
         src="/images/logos/icons8-logo.svg"
         width={30}
@@ -11,7 +14,7 @@ const Logo = () => {
         alt="logo"
         priority
       />
-    </div>
+    </Link>
   );
 };
 

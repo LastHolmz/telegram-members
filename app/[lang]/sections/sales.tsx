@@ -1,24 +1,27 @@
 import { Button } from "@/components/ui/button";
+import { getDictionary } from "@/get-dictionary";
 import Image from "next/image";
 
-const FourthSection = () => {
+const SalesSection = async ({
+  params: { lang },
+}: {
+  params: { lang: Lang };
+}) => {
+  const dictionary = await getDictionary(lang);
+
   return (
     <section className="items-center flex justify-center bg-secondary py-10">
       <div className="flex container gap-10 justify-center items-center flex-col md:flex-row py-10">
         {" "}
         <div className="w-full gap-5 flex flex-col items-center md:items-start text-start mx-auto rounded-xl text-foreground font-normal text-sm">
           <h5 className="text-2xl md:text-3xl text-center md:text-start font-bold ">
-            Start building your online store today.
+            {dictionary.sales.heading}
           </h5>
-          <div>
-            Curious about how Bird can help your business? Get in touch with our
-            team to learn more about our platform and how we can help you grow
-            your business.
-          </div>
+          <div>{dictionary.sales.p}</div>
 
           <Button aria-label="contact sales Button" className="" size={"lg"}>
             {" "}
-            Contact Sales
+            {dictionary.sales.buttons.sales}
           </Button>
         </div>
         <div className="w-[80%] mx-auto md:w-1/3">
@@ -35,4 +38,4 @@ const FourthSection = () => {
   );
 };
 
-export default FourthSection;
+export default SalesSection;

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import LangRenderer from "@/app/[lang]/components/lang";
 
 const images = [
   {
@@ -87,7 +88,12 @@ const Carousel = () => {
         className="items-center justify-center flex text-xl md:text-3xl text-center md:text-start font-bold md:pb-10 px-10 bg-gradient-to-r from-gradaint to-primary/90 bg-clip-text text-transparent
         "
       >
-        More than 100+ brands have built their business with Bird Software
+        <LangRenderer
+          en={
+            "More than 100+ brands have built their business with Bird Software"
+          }
+          ar={`أكثر من 100+ علامة تجارية أنشأت أعمالها مع Bird Software`}
+        />
       </h2>
 
       <div className="flex flex-wrap justify-center items-center">

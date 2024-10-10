@@ -9,6 +9,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
+import LangRenderer from "../lang";
 
 const ActionButtons = () => {
   return (
@@ -20,15 +21,28 @@ const ActionButtons = () => {
               <AlignJustify aria-label="bars icon that triggers the sidebar" />
             </Button>
           </SheetTrigger>
+
           <SheetContent>
             <SheetHeader>
               <SheetDescription>
                 <div className="flex flex-col items-start space-y-4 text-lg text-black dark:text-white mt-10 w-full ">
-                  <Link href="/">Sign in</Link>
-                  <Link href="/">Get Started</Link>
-                  <Link href="/">Pricing</Link>
-                  <Link href="/">Contact</Link>
-                  <Link href="/">About</Link>
+                  <Link href="/">
+                    {" "}
+                    <LangRenderer en={`Sign in`} ar={`تسجيل الدخول`} />
+                  </Link>
+                  <Link href="/">
+                    {" "}
+                    <LangRenderer en={`Get Started`} ar={`لنبدء`} />
+                  </Link>
+                  <Link href="/">
+                    <LangRenderer en={`Pricing`} ar={`الإسعار`} />
+                  </Link>
+                  <Link href="/">
+                    <LangRenderer en={`Contact`} ar={`اتصل بنا`} />
+                  </Link>
+                  <Link href="/">
+                    <LangRenderer en={`About`} ar={`حولنا`} />
+                  </Link>
                 </div>
               </SheetDescription>
             </SheetHeader>
@@ -37,9 +51,11 @@ const ActionButtons = () => {
       </div>
       <div className="hidden md:flex md:space-x-4 ">
         <Button aria-label="login button" variant="ghost">
-          Sign in
+          <LangRenderer en={`Sign in`} ar={`تسجيل الدخول`} />
         </Button>
-        <Button aria-label="get started button">Get Started</Button>
+        <Button aria-label="get started button">
+          <LangRenderer en={`Get Started`} ar={`لنبدء`} />
+        </Button>
       </div>
     </div>
   );

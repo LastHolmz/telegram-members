@@ -1,0 +1,62 @@
+{
+  "main": {
+    "heading": "Build a brand and start selling in seconds",
+    "p": "No matter what you sell, Bird Software has everything you need to run your online store.",
+    "buttons": {
+      "start": "Get Started",
+      "learn": "Learn More"
+    }
+  },
+  "brand": "More than 100+ brands have built their business with Bird Software",
+  "start": {
+    "heading": "From startup to enterprise, Bird is built for every type of business.",
+    "p": "Built for all businesses and communities, Bird is the only platform you need to grow your business.",
+    "buttons": {
+      "start": "Get Started"
+    }
+  },
+  "feature": {
+    "heading": "Product Features"
+  },
+  "customization": {
+    "heading": "Fully Customizable eCommerce",
+    "first": "Choose from a variety of store templates to get started. And customize your store to fit your brand.",
+    "second": "Add unlimited products and variations. And manage your inventory with ease.",
+    "third": "Gain valuable insights into your customers and products with our analytics tools.",
+    "forth": "Best in class security to protect your data and your customers.    "
+  },
+  "sales": {
+    "heading": "Start building your online store today.",
+    "p": "Curious about how Bird can help your business? Get in touch with our team to learn more about our platform and how we can help you grow your business.",
+    "buttons": {
+      "sales": "Contact Sales"
+    }
+  },
+  "Pricing": {
+    "heading": "Pricing",
+    "p": "Simple and transparent pricing plans for all businesses.",
+    "offers": [
+      {
+        "h": "Basic",
+        "price": "$40/month",
+        "ration": "3.7% + 30¢ per transaction",
+        "desc": "Start selling online with a simple and easy to use platform. Create your first store in minutes..",
+        "button": "Get Started"
+      },
+      {
+        "h": "Standard",
+        "price": "$80/month",
+        "ration": "2.9% + 30¢ per transaction",
+        "desc": "Level up your business with a powerful eCommerce platform. Get access to all the features you need to grow.",
+        "button": "Get Started"
+      },
+      {
+        "h": "Premium",
+        "price": "$200/month",
+        "ration": "2.4% + 30¢ per transaction",
+        "desc": "For businesses that need more. Get access to all the features you need to grow.",
+        "button": "Get Started"
+      }
+    ]
+  }
+}
