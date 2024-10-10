@@ -50,29 +50,29 @@ const features: { name: string; icon: IconType; description: string }[] = [
 
 const SecondSection = () => {
   return (
-    <div className="">
-      <div className=" md:flex-row flex-col items-center flex  container justify-center pb-10">
-        <div className="p-5 justify-center">
-          <div className=" bg-gradient-to-r  from-primary/100 to-gradaint/80 bg-clip-text text-transparent text-4xl md:text-6xl font-bold pb-10 ">
+    <section>
+      <div className="container py-10">
+        <div className="p-5 flex min-h-[50vh] justify-center flex-col md:items-start items-center gap-10">
+          <h3 className=" bg-gradient-to-r from-primary/100 to-gradaint/80 bg-clip-text text-transparent text-xl md:text-3xl text-center md:text-start font-bold">
             From startup to enterprise, Bird is built for every type of
             business.
-          </div>
-          <div className="text-2xl mb-8">
+          </h3>
+          <p className="text-lg  text-center md:text-start">
             Built for all businesses and communities, Bird is the only platform
             you need to grow your business.
-          </div>
+          </p>
           <Button size={"lg"} aria-label="get started Button">
             Get Started
           </Button>
         </div>
       </div>
 
-      <div className="flex-col items-center justify-center">
-        <div className=" text-3xl flex justify-center md:text-5xl font-bold pt-5 pb-10 bg-gradient-to-r  from-primary  to-gradaint bg-clip-text text-transparent">
+      <div className="flex-col flex items-center justify-center bg-secondary py-10">
+        <h4 className="text-2xl md:text-3xl text-center md:text-start flex font-bold  bg-gradient-to-r  from-primary  to-gradaint bg-clip-text text-transparent">
           Product Features
-        </div>
+        </h4>
 
-        <div className="grid grid-cols-1 p-4 md:grid md:grid-cols-3 gap-4 md:gap-10 my-2  md:my-8 md:px-40">
+        <div className="grid grid-cols-1 p-4 container  lg:grid-cols-3 md:grid-cols-2 gap-4 md:gap-10">
           {features.map((feature, index) => (
             <div
               key={index}
@@ -81,9 +81,9 @@ const SecondSection = () => {
             >
               <div className="text-3xl font-bold flex flex-col justify-center items-center">
                 <feature.icon className=" text-primary font-bold" size={"48"} />
-                <div className="text-2xl my-4">{feature.name}</div>
+                <div className="text-xl my-4">{feature.name}</div>
 
-                <p className=" text-sm font-normal text-center">
+                <p className="text-sm font-normal text-center">
                   {feature.description}
                 </p>
               </div>
@@ -91,7 +91,7 @@ const SecondSection = () => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

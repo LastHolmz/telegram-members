@@ -82,15 +82,15 @@ const Carousel = () => {
   }, []);
 
   return (
-    <div>
-      <div
-        className="items-center justify-center flex text-3xl font-bold md:pb-10 px-10 bg-gradient-to-r from-blue-500 to-green-300 bg-clip-text text-transparent
+    <div className="w-full bg-secondary py-10">
+      <h2
+        className="items-center justify-center flex text-xl md:text-3xl text-center md:text-start font-bold md:pb-10 px-10 bg-gradient-to-r from-gradaint to-primary/90 bg-clip-text text-transparent
         "
       >
         More than 100+ brands have built their business with Bird Software
-      </div>
+      </h2>
 
-      <div className="grid grid-cols-3 p-4 md:flex">
+      <div className="flex flex-wrap justify-center items-center">
         <AnimatePresence custom={currentImageIndex}>
           {images.map((image, index) => (
             <motion.div
@@ -101,7 +101,7 @@ const Carousel = () => {
                 scale: index === currentImageIndex ? 1.2 : 1,
                 transition: { duration: 0.5 },
               }}
-              className="flex items-center justify-center h-40 w-40"
+              className="flex  h-40 w-40 justify-center items-center"
               exit={{ opacity: 0 }}
               custom={index}
               transition={{
