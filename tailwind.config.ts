@@ -3,10 +3,9 @@ import type { Config } from "tailwindcss";
 const config = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   prefix: "",
   theme: {
@@ -19,7 +18,7 @@ const config = {
     },
     extend: {
       screens: {
-        "sm-max": { max: "768px" },
+        "phone-only": { max: "768px" },
       },
       colors: {
         border: "hsl(var(--border))",
@@ -72,10 +71,17 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        border: {
+          to: { "--border-angle": "360deg" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "spin-slow": "spin 8s linear infinite",
+        "spin-medium": "spin 5s linear infinite",
+        "spin-fast": "spin 3s linear infinite",
+        border: "border 4s linear infinite",
       },
     },
   },

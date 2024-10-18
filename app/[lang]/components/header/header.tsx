@@ -9,7 +9,7 @@ export default function Navbar() {
   return (
     <header
       dir="ltr"
-      className="flex items-center justify-between px-10 border-b fixed w-full bg-background/85 z-50 sm-max:py-4"
+      className="flex items-center justify-between px-10 border-b fixed w-full bg-background/85 z-50 phone-only:py-4"
     >
       <Logo />
       <div className="flex-1 flex justify-center w-full">

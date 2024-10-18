@@ -36,9 +36,8 @@ export async function generateStaticParams() {
 // }
 
 export const metadata: Metadata = {
-  title: "القالب 1",
-  description:
-    "قالب 1 هو قالب صفحة هبوط للأعمال والتطبيقات التجارية والتجارة الإلكترونية",
+  title: "TeMe",
+  description: "Grow Your Telegram Community in Seconds ",
   keywords: ["الابتكار التقني", "القالب 1"],
 };
 

@@ -1,6 +1,6 @@
 import Carousel from "@/components/carousel";
 import MainSection from "./sections/main";
-import Navbar from "./components/navbar/navbar";
+import Header from "./components/header/header";
 import Footer from "./components/footer";
 import ThirdSection from "./sections/get-started";
 import SecondSection from "./sections/brands";
@@ -12,7 +12,7 @@ import RequestDemo from "./components/request-demo";
 const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
   return (
     <>
-      <Navbar />
+      <Header />
       <main>
         <MainSection
           params={{

@@ -20,7 +20,7 @@ const ThirdSection = async ({
             {dictionary.customization.heading}
           </h3>
 
-          <div className="flex flex-col sm-max:container gap-10 w-full justify-center">
+          <div className="flex flex-col phone-only:container gap-10 w-full justify-center">
             <div className="text-lg pt-10 flex justify-center items-center flex-row text-start gap-4">
               <div className="text-primary bg-primary/20 px-2 py-1 rounded-md">
                 <CiShop size={48} />

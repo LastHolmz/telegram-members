@@ -6,12 +6,13 @@ import { useParams } from "next/navigation";
 const Logo = () => {
   const { lang } = useParams();
   return (
-    <Link href={`/${lang}`} scroll>
+    <Link href={`/${lang}`} scroll className="w-16 md:h-24 h-16">
       <Image
-        src="/images/logos/icons8-logo.svg"
-        width={30}
-        height={30}
+        src="/logo.png"
+        width={1000}
+        height={1000}
         alt="logo"
+        className=" w-full h-full object-cover"
         priority
       />
     </Link>

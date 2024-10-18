@@ -1,7 +1,9 @@
-import React from "react";
-import { SendCodeForm } from "./components/forms";
+import { getAccounts } from "@/db/accounts";
+import { SendCodeForm } from "../components/forms";
 
-const page = () => {
+const page = async () => {
+  //   const accounts = await getAccounts();
+  //   console.log(accounts);
   return (
     <main
       dir="rtl"

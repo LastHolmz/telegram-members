@@ -68,6 +68,6 @@ export function middleware(request: NextRequest) {
 export const config = {
   // Matcher ignoring API, Next.js files, and static assets
   matcher: [
-    "/((?!api|_next/static|_next/image|images|content|favicon.ico|robots.txt|sitemap.xml|images/|logos/).*)",
+    "/((?!api|_next/static|_next/image|images|content|favicon.ico|robots.txt|sitemap.xml|logo.png|images/|logos/).*)",
   ],
 };
