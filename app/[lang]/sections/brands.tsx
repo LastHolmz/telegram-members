@@ -17,57 +17,57 @@ interface Feature {
 
 const features: Feature[] = [
   {
-    name: "Customizable",
-    arName: "قابل للتخصيص",
+    name: "Account Management",
+    arName: "إدارة الحسابات",
     description:
-      "Choose from 100s of designer made templates, and change anything you want to create your professional eCommerce website.",
+      "Add and manage multiple Telegram accounts with ease. Control all your accounts in one place.",
     arDesc:
-      "اختر من مئات القوالب المصممة، وقم بتغيير أي شيء تريده لإنشاء موقع التجارة الإلكترونية الاحترافي الخاص بك.",
+      "أضف وأدر عدة حسابات Telegram بسهولة. تحكم في جميع حساباتك من مكان واحد.",
     icon: TbUserEdit,
   },
   {
-    name: "Fast",
-    arName: "سريع",
+    name: "Member Addition",
+    arName: "إضافة الأعضاء",
     description:
-      "Choose from 100s of designer made templates, and change anything you want to create your professional eCommerce website.",
+      "Automatically add members to your Telegram groups. Boost your group size effortlessly.",
     arDesc:
-      "اختر من مئات القوالب المصممة، وقم بتغيير أي شيء تريده لإنشاء موقع التجارة الإلكترونية الاحترافي الخاص بك.",
+      "أضف الأعضاء إلى مجموعات Telegram الخاصة بك تلقائيًا. قم بزيادة حجم مجموعتك دون عناء.",
     icon: FaBoltLightning,
   },
   {
-    name: "Integrations",
-    arName: "تكاملات",
+    name: "Buy Members",
+    arName: "شراء الأعضاء",
     description:
-      "Choose from 100s of designer made templates, and change anything you want to create your professional eCommerce website.",
+      "Easily purchase new members for your Telegram group. Enhance your group's popularity with real members.",
     arDesc:
-      "اختر من مئات القوالب المصممة، وقم بتغيير أي شيء تريده لإنشاء موقع التجارة الإلكترونية الاحترافي الخاص بك.",
-    icon: PiPlugsConnectedBold,
-  },
-  {
-    name: "Full Stack",
-    arName: "مكدس كامل",
-    description:
-      "Choose from 100s of designer made templates, and change anything you want to create your professional eCommerce website.",
-    arDesc:
-      "اختر من مئات القوالب المصممة، وقم بتغيير أي شيء تريده لإنشاء موقع التجارة الإلكترونية الاحترافي الخاص بك.",
-    icon: FaDev,
-  },
-  {
-    name: "Loyalty",
-    arName: "الولاء",
-    description:
-      "Set up your loyalty program and start rewarding your customers for their purchases and actions they take on your site.",
-    arDesc:
-      "قم بإعداد برنامج الولاء الخاص بك وابدأ بمكافأة عملائك على مشترياتهم والإجراءات التي يتخذونها على موقعك.",
+      "قم بشراء أعضاء جدد لمجموعة Telegram الخاصة بك بسهولة. عزز شعبية مجموعتك مع أعضاء حقيقيين.",
     icon: MdLoyalty,
   },
   {
-    name: "Support",
-    arName: "الدعم",
+    name: "View Booster",
+    arName: "زيادة المشاهدات",
     description:
-      "Get 24/7 support from our team to help you with any issues you have.",
+      "Increase the number of views on your Telegram posts and channels. Gain more exposure with our view booster tool.",
     arDesc:
-      "احصل على دعم على مدار الساعة طوال أيام الأسبوع من فريقنا لمساعدتك في أي مشكلات تواجهها.",
+      "قم بزيادة عدد المشاهدات على منشورات وقنوات Telegram الخاصة بك. احصل على المزيد من الظهور باستخدام أداة زيادة المشاهدات.",
+    icon: PiPlugsConnectedBold,
+  },
+  {
+    name: "Full Automation",
+    arName: "أتمتة كاملة",
+    description:
+      "Automate your Telegram tasks such as adding members, sending messages, and more. Save time with our automated solutions.",
+    arDesc:
+      "قم بأتمتة مهام Telegram الخاصة بك مثل إضافة الأعضاء، إرسال الرسائل والمزيد. وفر الوقت باستخدام حلولنا المؤتمتة.",
+    icon: FaDev,
+  },
+  {
+    name: "24/7 Support",
+    arName: "دعم على مدار الساعة",
+    description:
+      "Get round-the-clock support from our team to help with any issues or questions you have.",
+    arDesc:
+      "احصل على دعم على مدار الساعة من فريقنا للمساعدة في أي مشكلات أو أسئلة تواجهها.",
     icon: MdSupportAgent,
   },
 ];

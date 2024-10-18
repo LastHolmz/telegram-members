@@ -1,16 +1,16 @@
 {
   "main": {
-    "heading": "Build a brand and start selling in seconds",
-    "p": "No matter what you sell, Bird Software has everything you need to run your online store.",
+    "heading": "Grow Your Telegram Community in Seconds",
+    "p": "No matter your goals, [Your Business Name] has everything you need to boost your Telegram group's members and views effortlessly.",
     "buttons": {
       "start": "Get Started",
       "learn": "Learn More"
     }
   },
-  "brand": "More than 100+ brands have built their business with Bird Software",
+  "brand": "More than 100+ communities have grown with [Your Business Name]",
   "start": {
-    "heading": "From startup to enterprise, Bird is built for every type of business.",
-    "p": "Built for all businesses and communities, Bird is the only platform you need to grow your business.",
+    "heading": "From influencers to businesses, we’ve got your Telegram covered.",
+    "p": "Whether you're growing your personal brand or managing a community, [Your Business Name] provides all the tools you need to add members, increase views, and manage your Telegram account with ease.",
     "buttons": {
       "start": "Get Started"
     }
@@ -19,42 +19,42 @@
     "heading": "Product Features"
   },
   "customization": {
-    "heading": "Fully Customizable eCommerce",
-    "first": "Choose from a variety of store templates to get started. And customize your store to fit your brand.",
-    "second": "Add unlimited products and variations. And manage your inventory with ease.",
-    "third": "Gain valuable insights into your customers and products with our analytics tools.",
-    "forth": "Best in class security to protect your data and your customers.    "
+    "heading": "Fully Automated Telegram Services",
+    "first": "Add multiple Telegram accounts and automate the process of growing your group members.",
+    "second": "Purchase real members or views instantly. Manage your growth with ease and track your progress.",
+    "third": "Gain valuable insights into your Telegram groups and performance with our analytics tools.",
+    "forth": "Best-in-class security to protect your accounts and data, ensuring complete privacy and reliability."
   },
   "sales": {
-    "heading": "Start building your online store today.",
-    "p": "Curious about how Bird can help your business? Get in touch with our team to learn more about our platform and how we can help you grow your business.",
+    "heading": "Start building your Telegram community today.",
+    "p": "Curious about how [Your Business Name] can help your Telegram group grow? Get in touch with our team to learn more about our platform and how we can help you scale.",
     "buttons": {
       "sales": "Contact Sales"
     }
   },
   "Pricing": {
     "heading": "Pricing",
-    "p": "Simple and transparent pricing plans for all businesses.",
+    "p": "Flexible and transparent pricing plans for all your Telegram growth needs.",
     "offers": [
       {
         "h": "Basic",
         "price": "$40/month",
         "ration": "3.7% + 30¢ per transaction",
-        "desc": "Start selling online with a simple and easy to use platform. Create your first store in minutes..",
+        "desc": "Get started by adding members or increasing views on your Telegram group with our entry-level plan.",
         "button": "Get Started"
       },
       {
         "h": "Standard",
         "price": "$80/month",
         "ration": "2.9% + 30¢ per transaction",
-        "desc": "Level up your business with a powerful eCommerce platform. Get access to all the features you need to grow.",
+        "desc": "Enhance your Telegram community with more advanced tools and features to manage and grow your group faster.",
         "button": "Get Started"
       },
       {
         "h": "Premium",
         "price": "$200/month",
         "ration": "2.4% + 30¢ per transaction",
-        "desc": "For businesses that need more. Get access to all the features you need to grow.",
+        "desc": "For businesses or large communities that need advanced management tools, automation, and priority support for Telegram growth.",
         "button": "Get Started"
       }
     ]
