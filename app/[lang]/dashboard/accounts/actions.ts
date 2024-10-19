@@ -32,6 +32,7 @@ export async function sendCodeActoin(
     return { message: "فشلت العملية", phoneCodeHash: null };
   }
 }
+//7c022b5a1559d78dc8
 
 export async function loginAction(
   prevState: {
@@ -68,7 +69,7 @@ export async function loginAction(
       phoneNumber,
       password: password === null ? undefined : password,
     });
-    return { message: "res.message" };
+    return { message: res.message };
   } catch (e) {
     console.log(e);
     return { message: "فشلت العملية" };

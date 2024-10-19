@@ -1,7 +1,7 @@
 "use server";
 
 import uri from "@/lib/uri";
-import { unstable_cache } from "next/cache";
+import { revalidateTag, unstable_cache } from "next/cache";
 
 export const sendCode = async (phoneNumber: string) => {
   try {
@@ -49,10 +49,13 @@ export const login = async ({
       },
     });
     const data = await res.json();
+    console.log(data);
     if (data["message"]) {
+      revalidateTag("accounts");
       return { message: data["message"] };
     }
-    return { message: data["errorMessage"] as string, phoneCodeHash: null };
+
+    return { message: data["errorMessage"] as string, phoneCodeHash: "0" };
   } catch (error) {
     return {
       message: "couldn't connect to the server",

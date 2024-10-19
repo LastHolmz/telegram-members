@@ -81,3 +81,7 @@ html {
   initial-value: 0deg;
   syntax: "<angle>";
 }
+
+.react-tel-input .form-control {
+  width: 100% !important;
+}

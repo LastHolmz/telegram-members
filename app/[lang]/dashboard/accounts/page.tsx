@@ -11,7 +11,6 @@ import {
 import Link from "next/link";
 import { getAccounts } from "@/db/accounts";
 import { accountsTable } from "./components/accounts-column";
-import { revalidateTag } from "next/cache";
 import { CustomLink } from "@/components/ui/custom-link";
 const page = async ({
   searchParams,
@@ -19,10 +18,13 @@ const page = async ({
   searchParams: { content?: string };
 }) => {
   // revalidateTag("accounts");
+
   const accounts = await getAccounts({ phoneNumber: searchParams?.content });
+  // revalidateTag("accounts");
+
   return (
     <main className="phone-only:px-4">
-      <div className=" flex justify-between flex-col md:flex-row items-center mx-2 my-2">
+      <div className=" flex md:justify-between  justify-start flex-col  md:flex-row md:items-center md:mx-2 my-2">
         <Breadcrumb className="my-2" dir="rtl">
           <BreadcrumbList>
             <BreadcrumbItem>
