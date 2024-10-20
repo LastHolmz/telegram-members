@@ -1,8 +1,6 @@
 "use server";
 
-// import uri from "@/lib/uri";
 import prisma from "@/prisma/db";
-import { Session } from "inspector/promises";
 import { revalidateTag, unstable_cache } from "next/cache";
 import { env } from "process";
 import { TelegramClient, Api } from "telegram";

@@ -16,3 +16,21 @@ model TelegramAccount {
   phoneNumber String  @unique
   password    String?
 }
+
+model User {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  fullName      String
+  phoneNumber   Int
+  password      String
+  email         String  @unique
+  verified      Boolean @default(false)
+  verifyingCode Int
+  role          Roles   @default(user)
+}
+
+enum Roles {
+  user
+  admin
+  superAdmin
+  subscriber
+}

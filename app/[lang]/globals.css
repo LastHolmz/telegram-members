@@ -116,6 +116,26 @@ html {
   @apply sm:w-full w-[90%];
 }
 
+.auth-bg {
+  background: rgb(22, 163, 74);
+  background: -moz-linear-gradient(
+    145deg,
+    rgba(22, 163, 74, 1) 42%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    145deg,
+    rgba(22, 163, 74, 1) 42%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  background: linear-gradient(
+    145deg,
+    rgba(22, 163, 74, 1) 42%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#16a34a",endColorstr="#00d4ff",GradientType=1);
+}
+
 @layer base {
   * {
     @apply border-border;
