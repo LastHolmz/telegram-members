@@ -11,11 +11,11 @@ const Loading = ({ open, setOpen }: Props) => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent
           aria-describedby="loading"
-          className="sm:w-full w-[90%] py-10 rounded-md"
+          className="loading py-10 rounded-md"
         >
           <DialogTitle className="hidden"></DialogTitle>
           <div className="mx-auto grid gap-2 w-fit">
-            <Loader />{" "}
+            <Loader />
             <span className="mt-2 block text-center text-primary">
               جاري التحميل ...
             </span>
@@ -28,7 +28,7 @@ const Loading = ({ open, setOpen }: Props) => {
     <Dialog defaultOpen>
       <DialogContent
         aria-describedby="loading"
-        className="sm:w-full w-[90%] py-10 rounded-md"
+        className="loading py-10 rounded-md"
       >
         <DialogTitle className="hidden"></DialogTitle>
 

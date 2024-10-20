@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model TelegramAccount {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  accId       Int     @unique
+  session     String
+  username    String?
+  ownerId     String  @default("me")
+  phoneNumber String  @unique
+  password    String?
+}

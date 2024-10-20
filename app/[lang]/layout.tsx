@@ -56,7 +56,6 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head />
-      <link rel="icon" href="/images/logos/icons8-logo.svg" sizes="any" />
       <body
         className={cn(
           lang === "ar" ? cairo.className : outfit.className,

@@ -39,7 +39,7 @@ export default function SubmitButton({
         size={size}
         variant={variant}
         type={type}
-        // disabled={pending}
+        disabled={pending}
         aria-disabled={pending}
         {...rest}
         aria-label="submit"

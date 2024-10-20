@@ -20,6 +20,7 @@ import { CustomLink } from "@/components/ui/custom-link";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { HiMiniBars2 } from "react-icons/hi2";
 import ToggleTheme from "@/app/[lang]/components/theme-toggle";
+import { FaPeopleGroup } from "react-icons/fa6";
 
 const NavigationRailItem = ({
   pathname,
@@ -100,6 +101,7 @@ const NavigationRailHomeItem = ({
 const NavigationRail = () => {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState<boolean>(true);
+  const { lang } = useParams();
 
   return (
     <Sidebar
@@ -132,37 +134,23 @@ const NavigationRail = () => {
         <NavigationRailHomeItem
           pathname={pathname}
           collapsed={collapsed}
-          href="/dashboard"
+          href={`/${lang}/dashboard`}
           Icon={SiStatista}
           name="لوحة التحكم"
         />
         <NavigationRailItem
           pathname={pathname}
           collapsed={collapsed}
-          href="/dashboard/accounts"
+          href={`/${lang}/dashboard/accounts`}
           Icon={MdSupervisorAccount}
           name="حساباتي"
         />
         <NavigationRailItem
           pathname={pathname}
           collapsed={collapsed}
-          Icon={MdAttachEmail}
-          href="/dashboard/contact"
-          name="الرسائل"
-        />
-        <NavigationRailItem
-          pathname={pathname}
-          collapsed={collapsed}
-          href="/dashboard/users"
-          Icon={FaUsers}
-          name="المستخدمين"
-        />
-        <NavigationRailItem
-          pathname={pathname}
-          collapsed={collapsed}
-          href="/dashboard/orders"
-          Icon={MdLocalOffer}
-          name="الفواتير"
+          href={`/${lang}/dashboard/groups`}
+          Icon={FaPeopleGroup}
+          name="مجموعاتي"
         />
       </Menu>
     </Sidebar>
@@ -172,6 +160,7 @@ const NavigationRail = () => {
 export const DashboardNavigation = () => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const { lang } = useParams();
 
   return (
     <Sheet onOpenChange={setOpen} open={open}>
@@ -188,7 +177,7 @@ export const DashboardNavigation = () => {
                 onClick={() => setOpen(!open)}
                 pathname={pathname}
                 collapsed={false}
-                href="/dashboard"
+                href={`/${lang}/dashboard`}
                 Icon={SiStatista}
                 name="لوحة التحكم"
               />
@@ -198,7 +187,7 @@ export const DashboardNavigation = () => {
                 pathname={pathname}
                 onClick={() => setOpen(!open)}
                 collapsed={false}
-                href="/dashboard/accounts"
+                href={`/${lang}/dashboard/accounts`}
                 Icon={MdSupervisorAccount}
                 name="حساباتي"
               />
@@ -208,9 +197,9 @@ export const DashboardNavigation = () => {
                 pathname={pathname}
                 onClick={() => setOpen(!open)}
                 collapsed={false}
-                Icon={MdAttachEmail}
-                href="/dashboard/contact"
-                name="الرسائل"
+                href={`/${lang}/dashboard/groups`}
+                Icon={FaPeopleGroup}
+                name="مجموعاتي"
               />
             </li>
           </ul>
