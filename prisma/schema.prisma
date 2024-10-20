@@ -28,6 +28,12 @@ model User {
   role          Roles   @default(user)
 }
 
+model Session {
+  id                   String   @id @default(auto()) @map("_id") @db.ObjectId
+  recoveryToken        String
+  recoveryTokenExpires DateTime
+}
+
 enum Roles {
   user
   admin

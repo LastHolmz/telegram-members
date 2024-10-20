@@ -5,6 +5,7 @@ import { User } from "@prisma/client";
 import { revalidateTag } from "next/cache";
 import { sendMail } from "../lib/mail";
 import { checkPassword, encrypt, hashPassword, setCookie } from "@/lib/auth";
+import { env } from "process";
 
 export const createUser = async ({
   user: { email, fullName, phoneNumber, password, role },
@@ -92,6 +93,7 @@ export const createUser = async ({
         role: newUser.role,
         phoneNumber: newUser.phoneNumber,
         verified: newUser.verified,
+        email: newUser.email,
       },
       expires,
     });
@@ -181,6 +183,7 @@ export const login = async ({
         role: user.role,
         phoneNumber: user.phoneNumber,
         verified: user.verified,
+        email: user.email,
       },
       expires,
     });
@@ -277,6 +280,7 @@ export const verifyUser = async ({
         role: newUser.role,
         phoneNumber: newUser.phoneNumber,
         verified: newUser.verified,
+        email: newUser.email,
       },
       expires,
     });
@@ -297,18 +301,37 @@ export const recoverPassword = async ({ email }: { email: string }) => {
       return { message: "لم يتم العثور على حساب بهذا البريد الإلكتروني." }; // "No account found with this email."
     }
 
-    // Generate a unique verification code
-    const verifyingCode = generateRandomSixDigitNumber();
+    // Generate a unique recovery token (could be a UUID or some other secure random string)
+    const tokenExpires = new Date(Date.now() + 1 * 60 * 60 * 1000); // Token valid for 1 hour
 
-    // Update the user record with the verification code
-    await prisma.user.update({
-      where: { email },
+    // Create the session
+    const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+    const recoveryToken = await encrypt({
+      ...{
+        id: user.id,
+        fullName: user.fullName,
+        role: user.role,
+        phoneNumber: user.phoneNumber,
+        verified: user.verified,
+        email: user.email,
+      },
+      expires,
+    });
+
+    // Update the user record with the recovery token and expiration
+    await prisma.session.create({
       data: {
-        verifyingCode,
+        recoveryToken,
+        recoveryTokenExpires: tokenExpires,
       },
     });
 
     // Send the recovery email
+    const baseUrl =
+      env.NODE_ENV === "production"
+        ? "https://telegram-members.vercel.app/ar/check-token/"
+        : "http://localhost:3000/ar/check-token/";
+
     await sendMail({
       to: email,
       body: `
@@ -333,51 +356,153 @@ export const recoverPassword = async ({ email }: { email: string }) => {
               h1 {
                   color: #d9534f;
               }
-              code {
-                  display: block;
-                  margin: 20px 0;
-                  font-size: 24px;
-                  font-weight: bold;
-                  background-color: #e9ecef;
-                  padding: 10px;
-                  border-radius: 5px;
-                  text-align: center;
-                  color: #333;
-              }
               .footer {
                   margin-top: 30px;
                   font-size: 12px;
                   color: #888;
-                  text-align: center;
+              }
+              a {
+                  color: #0056b3;
+                  text-decoration: none;
+                  font-weight: bold;
               }
           </style>
       </head>
       <body>
           <div class="container">
-              <h1>طلب استعادة كلمة المرور</h1>
-              <p>لقد تلقينا طلباً لاستعادة كلمة المرور الخاصة بك. يرجى استخدام الرمز التالي لإعادة تعيين كلمة المرور:</p>
-              <code>${verifyingCode}</code>
-              <p>هذا الرمز صالح لمدة ساعة واحدة. إذا لم تطلب استعادة كلمة المرور، يمكنك تجاهل هذا البريد الإلكتروني.</p>
+              <h1>Password Recovery Request</h1>
+              <p>We received a request to reset your password. Click the link below to reset your password:</p>
+              <a href="${baseUrl}${recoveryToken}" target="_blank">
+                انقر هنا لتجديد كلمة المرور
+              </a>
+              <p>This link is valid for 1 hour. If you didn’t request a password reset, please ignore this email.</p>
               <div class="footer">
-                  <p>مع تحيات،</p>
-                  <p>فريق TEME</p>
+                  <p>Best regards,</p>
+                  <p>The TEME Team</p>
               </div>
           </div>
       </body>
       </html>
       `,
       name: "TEME Password Recovery",
-      subject: "طلب استعادة كلمة المرور", // "Password Recovery Request"
+      subject: "Password Recovery Request",
     });
 
     return {
-      message: "تم إرسال تعليمات استعادة كلمة المرور إلى بريدك الإلكتروني",
-    }; // "Password recovery instructions sent to your email."
+      message: "تم إرسال تعليمات استعادة كلمة المرور إلى بريدك الإلكتروني.", // "Password recovery instructions sent to your email."
+    };
   } catch (error) {
     console.log(error);
     return {
-      message: "حدث خطأ أثناء استعادة كلمة المرور. يرجى المحاولة لاحقاً.",
-    }; // "An error occurred during password recovery. Please try again later."
+      message: "حدث خطأ أثناء استعادة كلمة المرور. يرجى المحاولة لاحقاً.", // "An error occurred during password recovery. Please try again later."
+    };
+  }
+};
+export const resetPassword = async ({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) => {
+  try {
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
+      return { message: "لم يتم العثور على حساب بهذا البريد الإلكتروني." }; // "No account found with this email."
+    }
+
+    const hashedPassword = await hashPassword(password);
+    const updatedUser = await prisma.user.update({
+      where: {
+        email,
+      },
+      data: { password: hashedPassword },
+    });
+
+    if (!updatedUser) {
+      return { message: "فشل اعادة ضبط كلمة السر" }; // "Failed to reset password."
+    }
+
+    // Send the reset password email
+    await sendMail({
+      to: email,
+      body: `
+      <html>
+      <head>
+          <title>Password Reset Confirmation</title>
+          <style>
+              body {
+                  font-family: Arial, sans-serif;
+                  background-color: #f9f9f9;
+                  padding: 20px;
+                  color: #444;
+              }
+              .container {
+                  background-color: #ffffff;
+                  border-radius: 8px;
+                  padding: 20px;
+                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                  max-width: 600px;
+                  margin: auto;
+              }
+              h1 {
+                  color: #d9534f;
+              }
+              .footer {
+                  margin-top: 30px;
+                  font-size: 12px;
+                  color: #888;
+              }
+              a {
+                  color: #0056b3;
+                  text-decoration: none;
+                  font-weight: bold;
+              }
+          </style>
+      </head>
+      <body>
+          <div class="container">
+              <h1>تأكيد إعادة تعيين كلمة المرور</h1> <!-- "Password Reset Confirmation" -->
+              <p>لقد قمت بنجاح بإعادة تعيين كلمة المرور الخاصة بك. يمكنك الآن استخدام كلمة المرور الجديدة لتسجيل الدخول.</p>
+              <p>إذا لم تكن قد قمت بإعادة تعيين كلمة المرور، يرجى الاتصال بفريق الدعم.</p>
+              <div class="footer">
+                  <p>أطيب التحيات،</p> <!-- "Best regards," -->
+                  <p>فريق TEME</p>
+              </div>
+          </div>
+      </body>
+      </html>
+      `,
+      name: "تأكيد إعادة تعيين كلمة المرور", // "Password Reset Confirmation"
+      subject: "تم إعادة تعيين كلمة المرور بنجاح", // "Password Reset Successful"
+    });
+
+    // Create the session
+    const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+    const session = await encrypt({
+      ...{
+        id: updatedUser.id,
+        fullName: updatedUser.fullName,
+        role: updatedUser.role,
+        phoneNumber: updatedUser.phoneNumber,
+        verified: updatedUser.verified,
+        email: updatedUser.email,
+      },
+      expires,
+    });
+
+    // Save the session in a cookie
+    setCookie(session, expires);
+    revalidateTag("users");
+
+    return {
+      message: "تم اعادة ضبط كلمة السر", // "Password recovery instructions sent to your email."
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: "حدث خطأ أثناء استعادة كلمة المرور. يرجى المحاولة لاحقاً.", // "An error occurred during password recovery. Please try again later."
+    };
   }
 };
 

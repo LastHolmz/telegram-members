@@ -8,4 +8,5 @@ declare interface UserSession {
   role: Roles;
   phoneNumber: number;
   verified: boolean;
+  email: string;
 }

@@ -1,4 +1,10 @@
-import { createUser, login, recoverPassword, verifyUser } from "@/db/users";
+import {
+  createUser,
+  login,
+  recoverPassword,
+  resetPassword,
+  verifyUser,
+} from "@/db/users";
 import { z } from "zod";
 
 export async function createUserAction(
@@ -19,10 +25,10 @@ export async function createUserAction(
 
     // Parsing and validating the data
     const data = schema.safeParse({
-      email: formData.get("email"),
       fullName: formData.get("fullName"),
       phoneNumber: formData.get("phoneNumber"),
-      password: formData.get("password"),
+      email: z.string().email("البريد الإلكتروني غير صالح"), // "Invalid email"
+      password: z.string().min(6, "يجب أن تكون كلمة المرور 6 أحرف على الأقل"), // "Password must be at least 6 characters"
       // role: formData.get("role"),
     });
 
@@ -134,6 +140,44 @@ export async function verifyUserAction(
     });
 
     // Return the message from the verifyUser function
+    return { message: res.message };
+  } catch (error) {
+    console.error(error);
+    return { message: "فشلت العملية، يرجى المحاولة لاحقاً" }; // "The operation failed, please try again later"
+  }
+}
+export async function resetPasswordAction(
+  prevState: {
+    message: string;
+  },
+  formData: FormData
+) {
+  try {
+    // Schema for validating the incoming form data
+    const schema = z.object({
+      email: z.string().email("البريد الإلكتروني غير صالح"), // "Invalid email"
+      password: z.string().min(6, "يجب أن تكون كلمة المرور 6 أحرف على الأقل"), // "Password must be at least 6 characters"
+    });
+
+    // Parsing and validating the data
+    const data = schema.safeParse({
+      email: formData.get("email"),
+      password: formData.get("password"),
+    });
+
+    if (!data.success) {
+      // Return validation error messages
+      return {
+        message: data.error.errors.map((err) => err.message).join(", "),
+      };
+    }
+
+    const { email, password } = data.data;
+
+    // Attempt to recover the password
+    const res = await resetPassword({ email, password });
+
+    // Return the message from the recoverPassword function
     return { message: res.message };
   } catch (error) {
     console.error(error);

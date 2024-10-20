@@ -10,8 +10,10 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import LangRenderer from "../lang";
+import { useParams } from "next/navigation";
 
 const ActionButtons = () => {
+  const { lang } = useParams();
   return (
     <div>
       <div className="md:hidden">
@@ -26,11 +28,11 @@ const ActionButtons = () => {
             <SheetHeader>
               <SheetDescription>
                 <div className="flex flex-col items-start space-y-4 text-lg text-black dark:text-white mt-10 w-full ">
-                  <Link href="/">
+                  <Link href={`/${lang}/sign-in`}>
                     {" "}
                     <LangRenderer en={`Sign in`} ar={`تسجيل الدخول`} />
                   </Link>
-                  <Link href="/">
+                  <Link href={`/${lang}`}>
                     {" "}
                     <LangRenderer en={`Get Started`} ar={`لنبدء`} />
                   </Link>
