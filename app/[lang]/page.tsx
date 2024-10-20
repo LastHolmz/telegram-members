@@ -7,7 +7,8 @@ import SecondSection from "./sections/brands";
 import Pricing from "./sections/pricing";
 import SalesSection from "./sections/sales";
 import { Locale } from "@/i18n-config";
-import RequestDemo from "./components/request-demo";
+import ButtonLinkIcon from "./components/button-link-icon";
+import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 
 const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
   return (
@@ -42,7 +43,8 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
         />
       </main>
       <Footer />
-      <RequestDemo lang={lang} />
+
+      {/* <RequestDemo lang={lang} /> */}
     </>
   );
 };
