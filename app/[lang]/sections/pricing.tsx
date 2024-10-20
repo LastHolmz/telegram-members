@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { getDictionary } from "@/get-dictionary";
+import { Lang } from "@/types";
 
 const features = [
   {

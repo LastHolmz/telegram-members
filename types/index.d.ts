@@ -1,6 +1,6 @@
 import { Roles } from "@prisma/client";
 
-declare type Lang = "ar" | "en";
+type Lang = "ar" | "en";
 
 declare interface UserSession {
   id: string;

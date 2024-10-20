@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { getDictionary } from "@/get-dictionary";
+import { Lang } from "@/types";
 import Image from "next/image";
 
 const SalesSection = async ({
