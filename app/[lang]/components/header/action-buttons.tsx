@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import LangRenderer from "../lang";
 import { useParams } from "next/navigation";
+import { CustomLink } from "@/components/ui/custom-link";
 
 const ActionButtons = () => {
   const { lang } = useParams();
@@ -52,9 +53,13 @@ const ActionButtons = () => {
         </Sheet>
       </div>
       <div className="hidden md:flex md:space-x-4 ">
-        <Button aria-label="login button" variant="ghost">
+        <CustomLink
+          href={`/${lang}/sign-in`}
+          aria-label="login button"
+          variant="ghost"
+        >
           <LangRenderer en={`Sign in`} ar={`تسجيل الدخول`} />
-        </Button>
+        </CustomLink>
         <Button aria-label="get started button">
           <LangRenderer en={`Get Started`} ar={`لنبدء`} />
         </Button>

@@ -27,11 +27,18 @@ export async function createUserAction(
     const data = schema.safeParse({
       fullName: formData.get("fullName"),
       phoneNumber: formData.get("phoneNumber"),
-      email: z.string().email("البريد الإلكتروني غير صالح"), // "Invalid email"
-      password: z.string().min(6, "يجب أن تكون كلمة المرور 6 أحرف على الأقل"), // "Password must be at least 6 characters"
+      password: formData.get("password"),
+      email: formData.get("email"),
       // role: formData.get("role"),
     });
+    console.log({
+      fullName: formData.get("fullName"),
+      phoneNumber: formData.get("phoneNumber"),
+      email: z.string().email("البريد الإلكتروني غير صالح"), // "Invalid email"
+      password: z.string().min(6, "يجب أن تكون كلمة المرور 6 أحرف على الأقل"), // "Password must be at least 6 characters"}
+    });
 
+    console.log(data);
     if (!data.success) {
       // Return validation error messages
       return {
