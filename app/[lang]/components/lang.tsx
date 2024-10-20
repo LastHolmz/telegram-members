@@ -1,5 +1,6 @@
 "use client";
 
+import { Lang } from "@/types";
 import { useParams } from "next/navigation";
 import { ReactNode } from "react";
 

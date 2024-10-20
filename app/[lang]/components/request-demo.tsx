@@ -2,6 +2,7 @@ import { CustomLink } from "@/components/ui/custom-link";
 import LangRenderer from "./lang";
 import { VscGitPullRequestNewChanges } from "react-icons/vsc";
 import { cn } from "@/lib/utils";
+import { Lang } from "@/types";
 
 const RequestDemo = ({ lang }: { lang: Lang }) => {
   return (

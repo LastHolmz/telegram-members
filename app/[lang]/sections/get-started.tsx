@@ -1,4 +1,5 @@
 import { getDictionary } from "@/get-dictionary";
+import { Lang } from "@/types";
 import Image from "next/image";
 import { CiShop } from "react-icons/ci";
 import { FaShieldAlt } from "react-icons/fa";

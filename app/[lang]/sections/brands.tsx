@@ -6,6 +6,7 @@ import { IconType } from "react-icons";
 import { MdLoyalty, MdSupportAgent } from "react-icons/md";
 import { getDictionary } from "@/get-dictionary";
 import LangRenderer from "../components/lang";
+import { Lang } from "@/types";
 
 interface Feature {
   name: string;

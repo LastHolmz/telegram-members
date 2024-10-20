@@ -2,6 +2,7 @@
 
 import { useParams, usePathname } from "next/navigation";
 import { CustomLink } from "@/components/ui/custom-link";
+import { Lang } from "@/types";
 
 export default function LocaleSwitcher() {
   const pathname = usePathname();

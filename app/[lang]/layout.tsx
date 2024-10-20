@@ -9,6 +9,7 @@ const cairo = Cairo({ subsets: ["arabic"] });
 import { i18n } from "../../i18n-config";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
+import { Lang } from "@/types";
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
