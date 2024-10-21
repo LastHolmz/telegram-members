@@ -75,7 +75,3 @@ export const updateSession = async (request: NextRequest) => {
   });
   return res;
 };
-
-export async function handleSetCookie(session: string, expires: Date) {
-  await setCookie(session, expires); // Call your setCookie function
-}

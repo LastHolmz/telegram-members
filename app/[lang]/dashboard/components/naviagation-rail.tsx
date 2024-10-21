@@ -2,7 +2,7 @@
 import { Sidebar, Menu, sidebarClasses } from "react-pro-sidebar";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaUsersCog } from "react-icons/fa";
 import { useParams, usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { FaUsers } from "react-icons/fa";
@@ -37,8 +37,7 @@ const NavigationRailItem = ({
   name: string;
   onClick?: React.MouseEventHandler<HTMLAnchorElement> | undefined;
 }) => {
-  const { lang } = useParams();
-
+  const isActive = pathname === `${href}` || pathname.startsWith(`${href}/`);
   return (
     <CustomLink
       aria-label={name}
@@ -49,11 +48,7 @@ const NavigationRailItem = ({
       )}
       size={"lg"}
       href={href}
-      variant={
-        pathname === `/${lang}${href}` || pathname.startsWith(`/lang${href}/`)
-          ? "default"
-          : "ghost"
-      }
+      variant={isActive ? "default" : "ghost"}
     >
       <div>{!collapsed && <span>{name}</span>}</div>
       <div>
@@ -62,6 +57,7 @@ const NavigationRailItem = ({
     </CustomLink>
   );
 };
+
 const NavigationRailHomeItem = ({
   pathname,
   href,
@@ -152,6 +148,13 @@ const NavigationRail = () => {
           Icon={FaPeopleGroup}
           name="مجموعاتي"
         />
+        <NavigationRailItem
+          pathname={pathname}
+          collapsed={collapsed}
+          href={`/${lang}/dashboard/users`}
+          Icon={FaUsersCog}
+          name="المستخدمين"
+        />
       </Menu>
     </Sidebar>
   );
@@ -200,6 +203,16 @@ export const DashboardNavigation = () => {
                 href={`/${lang}/dashboard/groups`}
                 Icon={FaPeopleGroup}
                 name="مجموعاتي"
+              />
+            </li>
+            <li className="w-full">
+              <NavigationRailItem
+                pathname={pathname}
+                onClick={() => setOpen(!open)}
+                collapsed={false}
+                href={`/${lang}/dashboard/users`}
+                Icon={FaUsersCog}
+                name="المستخدمين"
               />
             </li>
           </ul>

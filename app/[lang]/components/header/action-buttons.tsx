@@ -12,9 +12,11 @@ import Link from "next/link";
 import LangRenderer from "../lang";
 import { useParams } from "next/navigation";
 import { CustomLink } from "@/components/ui/custom-link";
+import { useAuth } from "@/context/user";
 
 const ActionButtons = () => {
   const { lang } = useParams();
+  const { user } = useAuth();
   return (
     <div>
       <div className="md:hidden">
@@ -29,10 +31,14 @@ const ActionButtons = () => {
             <SheetHeader>
               <SheetDescription>
                 <div className="flex flex-col items-start space-y-4 text-lg text-black dark:text-white mt-10 w-full ">
-                  <Link href={`/${lang}/sign-in`}>
-                    {" "}
-                    <LangRenderer en={`Sign in`} ar={`تسجيل الدخول`} />
-                  </Link>
+                  {user ? (
+                    <span className=" text-xl font-bold">{user.fullName}</span>
+                  ) : (
+                    <Link href={`/${lang}/sign-in`}>
+                      {" "}
+                      <LangRenderer en={`Sign in`} ar={`تسجيل الدخول`} />
+                    </Link>
+                  )}
                   <Link href={`/${lang}`}>
                     {" "}
                     <LangRenderer en={`Get Started`} ar={`لنبدء`} />
@@ -46,6 +52,11 @@ const ActionButtons = () => {
                   <Link href="/">
                     <LangRenderer en={`About`} ar={`حولنا`} />
                   </Link>
+                  {user && user.role !== "user" && (
+                    <Link href={`/${lang}/dashboard`}>
+                      <LangRenderer en={`dashboard`} ar={`لوحة التحكم`} />
+                    </Link>
+                  )}
                 </div>
               </SheetDescription>
             </SheetHeader>
@@ -53,16 +64,22 @@ const ActionButtons = () => {
         </Sheet>
       </div>
       <div className="hidden md:flex md:space-x-4 ">
-        <CustomLink
-          href={`/${lang}/sign-in`}
-          aria-label="login button"
-          variant="ghost"
-        >
-          <LangRenderer en={`Sign in`} ar={`تسجيل الدخول`} />
-        </CustomLink>
-        <Button aria-label="get started button">
+        {user ? (
+          <span className=" content-center font-bold text-xl">
+            {user.fullName}
+          </span>
+        ) : (
+          <CustomLink
+            href={`/${lang}/sign-in`}
+            aria-label="login button"
+            variant="ghost"
+          >
+            <LangRenderer en={`Sign in`} ar={`تسجيل الدخول`} />
+          </CustomLink>
+        )}
+        {/* <Button aria-label="get started button">
           <LangRenderer en={`Get Started`} ar={`لنبدء`} />
-        </Button>
+        </Button> */}
       </div>
     </div>
   );

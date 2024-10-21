@@ -1,17 +1,20 @@
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { env } from "process";
 import React from "react";
-import { VerifyUserForm } from "../../components/forms";
+import { VerifyEmailForm } from "../../components/forms";
+import { Lang } from "@/types";
 
-const page = async () => {
+const page = async ({ params: { lang } }: { params: { lang: Lang } }) => {
   const user = await getSession();
   if (!user) {
-    redirect("/sign-up");
+    redirect(`/${lang}/sign-up`);
+  }
+  if (user.verified) {
+    // redirect(`/${lang}`);
   }
   return (
     <div>
-      <VerifyUserForm id={user.id} />
+      <VerifyEmailForm id={user.id} />
     </div>
   );
 };

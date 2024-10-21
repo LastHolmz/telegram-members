@@ -18,14 +18,30 @@ model TelegramAccount {
 }
 
 model User {
-  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
   fullName      String
   phoneNumber   Int
   password      String
-  email         String  @unique
-  verified      Boolean @default(false)
+  email         String        @unique
+  verified      Boolean       @default(false)
   verifyingCode Int
-  role          Roles   @default(user)
+  role          Roles         @default(user)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  Subscription  Subscription?
+}
+
+model Subscription {
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  allowedAccounts Int
+  price           Int
+  renew           Int       @default(0)
+  renewDate       DateTime?
+  creationDate    DateTime  @default(now())
+  period          Int
+  valid           Boolean   @default(true)
+  userId          String?   @unique @db.ObjectId
+  user            User?     @relation(fields: [userId], references: [id])
 }
 
 model Session {
@@ -38,5 +54,4 @@ enum Roles {
   user
   admin
   superAdmin
-  subscriber
 }

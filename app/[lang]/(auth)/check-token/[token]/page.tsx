@@ -1,5 +1,5 @@
 import LangRenderer from "@/app/[lang]/components/lang";
-import { decrypt, encrypt, handleSetCookie, setCookie } from "@/lib/auth";
+import { decrypt } from "@/lib/auth";
 import prisma from "@/prisma/db";
 import { UserSession } from "@/types";
 import { redirect } from "next/navigation";

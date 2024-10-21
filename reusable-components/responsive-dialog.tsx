@@ -41,7 +41,7 @@ export default function ResponsiveDialog({
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>{trigger}</DialogTrigger>
-        <DialogContent dir="rtl" className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             {title && <DialogTitle>{title}</DialogTitle>}
             {description && (
@@ -57,7 +57,7 @@ export default function ResponsiveDialog({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
-      <DrawerContent className="px-2" dir="rtl">
+      <DrawerContent className="px-2">
         <DrawerHeader className="text-right">
           {title && <DrawerTitle>{title}</DrawerTitle>}
           {description && <DrawerDescription>{description}</DrawerDescription>}
@@ -93,7 +93,7 @@ export function ResponsiveDialogWithCustomOpenFuncionality({
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>{trigger}</DialogTrigger>
-        <DialogContent dir="rtl" className="sm:max-w-[425px] px-4 py-8">
+        <DialogContent className="sm:max-w-[425px] px-4 py-8">
           <DialogHeader>
             {title && <DialogTitle>{title}</DialogTitle>}
             {description && (
@@ -109,7 +109,7 @@ export function ResponsiveDialogWithCustomOpenFuncionality({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
-      <DrawerContent dir="rtl" className="px-2 py-1">
+      <DrawerContent className="px-2 py-1">
         <DrawerHeader className="text-right">
           {title && <DrawerTitle>{title}</DrawerTitle>}
           {description && <DrawerDescription>{description}</DrawerDescription>}

@@ -1,20 +1,33 @@
 "use server";
 
 import prisma from "@/prisma/db";
-import { User } from "@prisma/client";
-import { revalidateTag } from "next/cache";
+import { Roles, User } from "@prisma/client";
+import { revalidateTag, unstable_cache } from "next/cache";
 import { sendMail } from "../lib/mail";
-import { checkPassword, encrypt, hashPassword, setCookie } from "@/lib/auth";
+import {
+  checkPassword,
+  encrypt,
+  getSession,
+  hashPassword,
+  setCookie,
+} from "@/lib/auth";
 import { env } from "process";
 
 export const createUser = async ({
   user: { email, fullName, phoneNumber, password, role },
 }: {
-  user: Omit<User, "id" | "verified" | "verifyingCode">;
+  user: Omit<
+    User,
+    "id" | "verified" | "verifyingCode" | "createdAt" | "updatedAt"
+  >;
 }) => {
   try {
     const hashedPassword = await hashPassword(password);
     const verifyingCode = generateRandomSixDigitNumber();
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (user) {
+      return { message: "هذا البريد مستعمل بالفعل" };
+    }
     const newUser = await prisma.user.create({
       data: {
         email,
@@ -110,10 +123,7 @@ export const createUser = async ({
 export const login = async ({
   user: { email, password },
 }: {
-  user: Omit<
-    User,
-    "id" | "verified" | "verifyingCode" | "role" | "phoneNumber" | "fullName"
-  >;
+  user: { email: string; password: string };
 }) => {
   try {
     const user = await prisma.user.findUnique({ where: { email } });
@@ -506,6 +516,75 @@ export const resetPassword = async ({
   }
 };
 
+export const getUsers = unstable_cache(
+  async ({ fullName }: { fullName?: string }) => {
+    try {
+      const users = await prisma.user.findMany({
+        where: {
+          fullName: {
+            contains: fullName,
+          },
+        },
+        include: { Subscription: true },
+      });
+      if (!users) {
+        return [];
+      }
+      return users;
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
+  },
+  ["users"],
+  { tags: ["users"] }
+);
+
+export const updateUserRole = async ({
+  id,
+  role,
+}: {
+  id: string;
+  role: Roles;
+}): Promise<{ message: string }> => {
+  try {
+    const session = await getSession();
+    if (!session) {
+      return {
+        message: "لاتمتلك الصلاحيات  لإكمال الإجراء",
+      };
+    }
+    if (session.role !== "superAdmin") {
+      return {
+        message: "لاتمتلك الصلاحيات  لإكمال الإجراء",
+      };
+    }
+    const user = await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        role,
+      },
+    });
+    if (!user) {
+      return {
+        message: "حدث خطأ أثناء تحديث المستخدم",
+      };
+    }
+    if (user.id === session.id) {
+      await updateCookies(user);
+    }
+    revalidateTag("users");
+    return {
+      message: "تم تحديث المستخدم بنجاح",
+    };
+  } catch (error) {
+    console.log(error);
+    return { message: "فشل تحديث الحساب, يرجى المحاولة لاحقا" };
+  }
+};
+
 function generateRandomSixDigitNumber(): number {
   // Generate the first digit (1-9)
   const firstDigit = Math.floor(Math.random() * 9) + 1;
@@ -520,3 +599,20 @@ function generateRandomSixDigitNumber(): number {
 
   return parseInt(randomNumber, 10); // Convert string to number
 }
+
+const updateCookies = async (user: User) => {
+  const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+  const session = await encrypt({
+    ...{
+      id: user.id,
+      fullName: user.fullName,
+      role: user.role,
+      phoneNumber: user.phoneNumber,
+      verified: user.verified,
+      email: user.email,
+    },
+    expires,
+  });
+  // Save the session in a cookie
+  setCookie(session, expires);
+};
