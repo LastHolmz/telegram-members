@@ -30,8 +30,8 @@ const Pricing = async ({ params: { lang } }: { params: { lang: Lang } }) => {
   const dictionary = await getDictionary(lang);
 
   return (
-    <section className=" py-10">
-      <h3 className=" text-2xl md:text-3xl text-center  font-bold bg-gradient-to-r from-primary   to-gradaint/80 bg-clip-text text-transparent ">
+    <section className="py-10" id="pricing">
+      <h3 className=" text-2xl text-primary my-2 md:text-3xl text-center font-bold ">
         {dictionary.Pricing.heading}
       </h3>
       <p className="text-center">{dictionary.Pricing.p}</p>

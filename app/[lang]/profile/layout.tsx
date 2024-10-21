@@ -11,7 +11,7 @@ const layout = ({ children }: { children: ReactNode }) => {
         <NavigationRail />
       </section>
 
-      <section className="flex-1 max-w-full">
+      <section className="w-full max-w-full">
         <ProfileHeader />
         {children}
       </section>

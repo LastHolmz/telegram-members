@@ -67,33 +67,13 @@ export const getAccounts = unstable_cache(
     phoneNumber?: string;
     userId?: string;
   }) => {
-    // console.log("calling get acc");
-    // console.log(
-    //   `${uri}/accounts?${phoneNumber ? `phoneNumber=${phoneNumber}` : ""}&${
-    //     userId ? `userId=${userId}` : ""
-    //   }`
-    // );
     try {
-      // const res = await fetch(
-      //   `${uri}/accounts?${phoneNumber && `phoneNumber=${phoneNumber}`}&${
-      //     userId && `userId=${userId}`
-      //   }`,
-      //   {
-      //     method: "GET",
-      //     headers: {
-      //       "Content-Type": "application/json", // Add the Content-Type header
-      //     },
-      //   }
-      // );
-      // const data: { data: TelegramAccount[] } = await res.json();
-      // if (data.data) {
-      //   return data.data;
-      // }
       const accounts = await prisma.telegramAccount.findMany({
         where: {
           phoneNumber: {
             contains: phoneNumber,
           },
+          ownerId: userId,
         },
       });
       if (accounts) {

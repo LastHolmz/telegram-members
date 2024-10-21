@@ -7,7 +7,10 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth !important;
+}
+::selection {
+  @apply bg-primary text-white;
 }
 
 .spinner {
