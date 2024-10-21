@@ -13,6 +13,7 @@ import LangRenderer from "../lang";
 import { useParams } from "next/navigation";
 import { CustomLink } from "@/components/ui/custom-link";
 import { useAuth } from "@/context/user";
+import LogoutForm from "../logout";
 
 const ActionButtons = () => {
   const { lang } = useParams();
@@ -52,10 +53,19 @@ const ActionButtons = () => {
                   <Link href="/">
                     <LangRenderer en={`About`} ar={`حولنا`} />
                   </Link>
-                  {user && user.role !== "user" && (
+                  {user && user.role === "user" ? (
+                    <Link href={`/${lang}/profile`}>
+                      <LangRenderer en={`profile`} ar={`الملف الشخصي`} />
+                    </Link>
+                  ) : (
                     <Link href={`/${lang}/dashboard`}>
                       <LangRenderer en={`dashboard`} ar={`لوحة التحكم`} />
                     </Link>
+                  )}
+                  {user && (
+                    <LogoutForm>
+                      <Button variant={"secondary"}>تسجيل الخروج</Button>
+                    </LogoutForm>
                   )}
                 </div>
               </SheetDescription>

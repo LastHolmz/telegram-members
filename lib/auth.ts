@@ -75,3 +75,14 @@ export const updateSession = async (request: NextRequest) => {
   });
   return res;
 };
+
+export const logout = async () => {
+  // Destroy the session
+  try {
+    cookies().set("session", "", { expires: new Date(0) });
+    // revalidatePath("/");
+    return { message: "تم تسجيل الخروج بنجاح" };
+  } catch (error) {
+    return { message: "حدث خطأ أثناء تسجيل الخروج" };
+  }
+};

@@ -585,6 +585,30 @@ export const updateUserRole = async ({
   }
 };
 
+export const getUserById = async (id: string) => {
+  try {
+    const user = await prisma.user.findUnique({ where: { id } });
+    if (!user) {
+      return undefined;
+    }
+    return user;
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+};
+
+export const checkUserValidity = async () => {
+  try {
+    const session = await getSession();
+    if (!session) return;
+    const user = await getUserById(session.id);
+    if (user) {
+      await updateCookies(user);
+    }
+  } catch (error) {}
+};
+
 function generateRandomSixDigitNumber(): number {
   // Generate the first digit (1-9)
   const firstDigit = Math.floor(Math.random() * 9) + 1;

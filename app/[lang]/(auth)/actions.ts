@@ -5,6 +5,7 @@ import {
   resetPassword,
   verifyUser,
 } from "@/db/users";
+import { logout } from "@/lib/auth";
 import { z } from "zod";
 
 export async function createUserAction(
@@ -220,6 +221,21 @@ export async function recoverPasswordAction(
     // Attempt to recover the password
     const res = await recoverPassword({ email });
 
+    // Return the message from the recoverPassword function
+    return { message: res.message };
+  } catch (error) {
+    console.error(error);
+    return { message: "فشلت العملية، يرجى المحاولة لاحقاً" }; // "The operation failed, please try again later"
+  }
+}
+export async function logoutAction(
+  prevState: {
+    message: string;
+  },
+  formData: FormData
+) {
+  try {
+    const res = await logout();
     // Return the message from the recoverPassword function
     return { message: res.message };
   } catch (error) {
