@@ -54,14 +54,20 @@ export async function middleware(request: NextRequest) {
         // Redirect to login with the same locale
         const locale = localeMatch[1];
         return NextResponse.redirect(
-          new URL(`/${locale}/sign-in`, request.url)
+          new URL(
+            `/${locale}/sign-in?redirect=${pathname.toString()}`,
+            request.url
+          )
         );
       }
       if (session.role !== "superAdmin") {
         // Redirect to login with the same locale
         const locale = localeMatch[1];
         return NextResponse.redirect(
-          new URL(`/${locale}/sign-in`, request.url)
+          new URL(
+            `/${locale}/sign-in?redirect=${pathname.toString()}`,
+            request.url
+          )
         );
       }
     }
@@ -78,20 +84,25 @@ export async function middleware(request: NextRequest) {
         // Redirect to login with the same locale
         const locale = localeMatch[1];
         return NextResponse.redirect(
-          new URL(`/${locale}/sign-in`, request.url)
+          new URL(
+            `/${locale}/sign-in?redirect=${pathname.toString()}`,
+            request.url
+          )
         );
       }
       if (session.role === "user") {
         // Redirect to login with the same locale
         const locale = localeMatch[1];
         return NextResponse.redirect(
-          new URL(`/${locale}/sign-in`, request.url)
+          new URL(
+            `/${locale}/sign-in?redirect=${pathname.toString()}`,
+            request.url
+          )
         );
       }
     }
 
     //user router
-
     if (
       protectedRoutes.userRoutes.some((route) =>
         pathWithoutLocale.includes(route)
@@ -104,7 +115,10 @@ export async function middleware(request: NextRequest) {
         // Redirect to login with the same locale
         const locale = localeMatch[1];
         return NextResponse.redirect(
-          new URL(`/${locale}/sign-in`, request.url)
+          new URL(
+            `/${locale}/sign-in?redirect=${pathname.toString()}`,
+            request.url
+          )
         );
       }
     }

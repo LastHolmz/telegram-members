@@ -458,14 +458,14 @@ export const SignUpForm = () => {
   );
 };
 
-export const SignInForm = () => {
+export const SignInForm = ({ href }: { href?: string }) => {
   const { lang } = useParams();
 
   return (
     <Form
       action={loginUserAction}
       success="تم تسجيل الدخول بنجاح."
-      replaceLink={`/${lang}`}
+      replaceLink={href ? `/${href}` : `/${lang}`}
     >
       <div className="text-start grid gap-4 mb-4">
         <div>
