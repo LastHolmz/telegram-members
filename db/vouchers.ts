@@ -95,6 +95,10 @@ export const payVoucher = async ({ code: value }: { code: string }) => {
     if (!voucher) {
       return { message: "لا يوجد كرت مطابق" };
     }
+    if (voucher.used) {
+      return { message: "هذا الكرت مستعمل بالفعل" };
+    }
+
     const updatedVoucher = await prisma.voucher.update({
       where: { code },
       data: {
