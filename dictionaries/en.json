@@ -37,25 +37,39 @@
     "p": "Flexible and transparent pricing plans for all your Telegram growth needs.",
     "offers": [
       {
-        "h": "Basic",
-        "price": "$40/month",
-        "ration": "3.7% + 30¢ per transaction",
-        "desc": "Get started by adding members or increasing views on your Telegram group with our entry-level plan.",
-        "button": "Get Started"
+        "id": "basic",
+
+        "h": "Basic Plan",
+        "price": "200 Dinars/month",
+        "desc": "Start adding members or increasing views on your Telegram group with our basic plan.",
+        "button": "Start Now",
+        "accounts": "10 accounts",
+        "members": "At least 8000 members can be added",
+        "price_int": 200,
+        "allowedAccounts": 10
       },
       {
-        "h": "Standard",
-        "price": "$80/month",
-        "ration": "2.9% + 30¢ per transaction",
-        "desc": "Enhance your Telegram community with more advanced tools and features to manage and grow your group faster.",
-        "button": "Get Started"
+        "id": "sponsered",
+
+        "h": "Sponsored Plan",
+        "price": "500 Dinars/month",
+        "desc": "Boost your Telegram community with advanced tools and features for faster group management and growth.",
+        "button": "Start Now",
+        "accounts": "33 accounts",
+        "members": "At least 39,600 members can be added",
+        "price_int": 500,
+        "allowedAccounts": 33
       },
       {
-        "h": "Premium",
-        "price": "$200/month",
-        "ration": "2.4% + 30¢ per transaction",
-        "desc": "For businesses or large communities that need advanced management tools, automation, and priority support for Telegram growth.",
-        "button": "Get Started"
+        "id": "premium",
+        "h": "Premium Plan",
+        "price": "200 Dinars/month",
+        "desc": "For large businesses or communities needing advanced management tools, automation, and priority support for growth on Telegram.",
+        "button": "Start Now",
+        "accounts": "10 accounts initially, but you can add as many as needed",
+        "members": "Unlimited",
+        "price_int": 200,
+        "allowedAccounts": 10
       }
     ]
   }

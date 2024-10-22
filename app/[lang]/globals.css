@@ -12,6 +12,9 @@ html {
 ::selection {
   @apply bg-primary text-white;
 }
+.m-header {
+  margin-top: 88px;
+}
 
 .spinner {
   width: 3em;

@@ -10,3 +10,5 @@ declare interface UserSession {
   verified: boolean;
   email: string;
 }
+
+type OfferType = "basic" | "sponsered" | "premium";
