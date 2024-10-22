@@ -10,11 +10,13 @@ import {
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { CustomLink } from "@/components/ui/custom-link";
-import { getUsers } from "@/db/users";
+// import { getUsers } from "@/db/users";
 // import { revalidateTag } from "next/cache";
-import { usersTable } from "./components/users-column";
+import { vouchersTable } from "./components/vouchers-column";
 import { revalidateTag } from "next/cache";
 import prisma from "@/prisma/db";
+import { getVouchers } from "@/db/vouchers";
+import { GenerateVoucherForm } from "./components/forms";
 const page = async ({
   searchParams,
   params: { lang },
@@ -22,14 +24,9 @@ const page = async ({
   searchParams: { content?: string };
   params: { lang: string };
 }) => {
-  // await prisma.user.updateMany({
-  //   data: {
-  //     faildAttempsToChargeVoucher: 0,
-  //   },
-  // });
-  revalidateTag("users");
-  const users = await getUsers({ fullName: searchParams?.content });
-
+  // await prisma.user.updateMany({ data: { money: 0 } });
+  // revalidateTag("users");
+  const vouchers = await getVouchers({ code: searchParams?.content });
   return (
     <main className="phone-only:px-4">
       <div className=" flex md:justify-between  justify-start flex-col  md:flex-row md:items-center md:mx-2 my-2">
@@ -48,18 +45,18 @@ const page = async ({
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage>ادارة المستخدمين</BreadcrumbPage>
+              <BreadcrumbPage>ادارة المالية</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <CustomLink href={`/${lang}/dashboard/users/new`}>حساب جديد</CustomLink>
       </div>
+      <GenerateVoucherForm />
       <div className=" my-4 md:container">
         <Suspense fallback={"جاري التحميل"}>
           <UsersTable
-            searchPlaceholder="البحث بالاسم"
-            data={users}
-            columns={usersTable}
+            searchPlaceholder="البحث بالكود"
+            data={vouchers}
+            columns={vouchersTable}
             searchQuery="content"
           />
         </Suspense>

@@ -16,10 +16,13 @@ import { env } from "process";
 export const createUser = async ({
   user: { email, fullName, phoneNumber, password, role },
 }: {
-  user: Omit<
-    User,
-    "id" | "verified" | "verifyingCode" | "createdAt" | "updatedAt"
-  >;
+  user: {
+    role: Roles;
+    fullName: string;
+    phoneNumber: number;
+    password: string;
+    email: string;
+  };
 }) => {
   try {
     const hashedPassword = await hashPassword(password);
@@ -526,6 +529,9 @@ export const getUsers = unstable_cache(
           },
         },
         include: { Subscription: true },
+        orderBy: {
+          createdAt: "desc",
+        },
       });
       if (!users) {
         return [];

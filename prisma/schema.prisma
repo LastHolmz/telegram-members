@@ -18,17 +18,20 @@ model TelegramAccount {
 }
 
 model User {
-  id            String        @id @default(auto()) @map("_id") @db.ObjectId
-  fullName      String
-  phoneNumber   Int
-  password      String
-  email         String        @unique
-  verified      Boolean       @default(false)
-  verifyingCode Int
-  role          Roles         @default(user)
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  Subscription  Subscription?
+  id                          String        @id @default(auto()) @map("_id") @db.ObjectId
+  fullName                    String
+  phoneNumber                 Int
+  password                    String
+  email                       String        @unique
+  verified                    Boolean       @default(false)
+  verifyingCode               Int
+  role                        Roles         @default(user)
+  money                       Int           @default(0)
+  createdAt                   DateTime      @default(now())
+  updatedAt                   DateTime      @updatedAt
+  Subscription                Subscription?
+  Voucher                     Voucher[]
+  faildAttempsToChargeVoucher Int           @default(0)
 }
 
 model Subscription {
@@ -40,8 +43,18 @@ model Subscription {
   creationDate    DateTime  @default(now())
   period          Int
   valid           Boolean   @default(true)
+  User            User?     @relation(fields: [userId], references: [id])
   userId          String?   @unique @db.ObjectId
-  user            User?     @relation(fields: [userId], references: [id])
+}
+
+model Voucher {
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  used    Boolean @default(false)
+  value   Int
+  creator String  @db.ObjectId
+  Owner   User?   @relation(fields: [ownerId], references: [id])
+  ownerId String? @db.ObjectId
+  code    String  @unique
 }
 
 model Session {

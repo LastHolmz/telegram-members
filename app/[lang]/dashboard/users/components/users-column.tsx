@@ -48,6 +48,18 @@ export const usersTable: ColumnDef<
     },
   },
   {
+    accessorKey: "الحساب",
+    header: "الحساب",
+    cell: ({ row }) => {
+      if (row) {
+        const money = row.original?.money;
+        return <div>{money} د</div>;
+      } else {
+        <div>لايوجد</div>;
+      }
+    },
+  },
+  {
     accessorKey: "البريد",
     header: "البريد",
     cell: ({ row }) => {

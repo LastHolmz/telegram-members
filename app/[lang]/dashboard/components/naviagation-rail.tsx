@@ -10,6 +10,7 @@ import { RiPresentationFill } from "react-icons/ri";
 import {
   MdAttachEmail,
   MdLocalOffer,
+  MdOutlinePayment,
   MdSupervisorAccount,
 } from "react-icons/md";
 
@@ -155,6 +156,13 @@ const NavigationRail = () => {
           Icon={FaUsersCog}
           name="المستخدمين"
         />
+        <NavigationRailItem
+          pathname={pathname}
+          collapsed={collapsed}
+          href={`/${lang}/dashboard/vouchers`}
+          Icon={MdOutlinePayment}
+          name="الكروت"
+        />
       </Menu>
     </Sidebar>
   );
@@ -213,6 +221,16 @@ export const DashboardNavigation = () => {
                 href={`/${lang}/dashboard/users`}
                 Icon={FaUsersCog}
                 name="المستخدمين"
+              />
+            </li>
+            <li className="w-full">
+              <NavigationRailItem
+                pathname={pathname}
+                onClick={() => setOpen(!open)}
+                collapsed={false}
+                href={`/${lang}/dashboard/vouchers`}
+                Icon={MdOutlinePayment}
+                name="الكروت"
               />
             </li>
           </ul>
