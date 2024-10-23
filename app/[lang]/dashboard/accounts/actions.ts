@@ -68,6 +68,7 @@ export async function loginAction(
       phoneCodeHash,
       phoneNumber,
       password: password === null ? undefined : password,
+      ownerId: "",
     });
     return { message: res.message };
   } catch (e) {
