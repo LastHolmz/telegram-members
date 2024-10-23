@@ -17,9 +17,9 @@ const BottomNavigationBar = ({
 }) => {
   return (
     <div className="hidden phone-only:block fixed w-full bottom-0 left-0">
-      <Separator className="bg-foreground" />
+      <Separator className="bg-primary" />
       <nav>
-        <ul className="flex justify-around items-center gap-4 w-full bg-secondary/90 z-10 px-4">
+        <ul className="flex justify-around items-center gap-4 w-full bg-background z-10 px-4">
           {children}
         </ul>
       </nav>

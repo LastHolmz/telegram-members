@@ -89,10 +89,8 @@ const Carousel = () => {
         "
       >
         <LangRenderer
-          en={
-            "More than 100+ brands have built their business with Bird Software"
-          }
-          ar={`أكثر من 100+ علامة تجارية أنشأت أعمالها مع Bird Software`}
+          en={"More than 100+ communities have grown with TeMe"}
+          ar={"أكثر من 100+ مجتمع نمى باستخدام TeMe"}
         />
       </h2>
 
