@@ -3,7 +3,7 @@ import LangRenderer from "./lang";
 
 const Footer = () => {
   return (
-    <footer className=" border-t-[1px]">
+    <footer className="border-t-[1px] mb-22">
       <div className="flex justify-evenly gap-4 p-4">
         <div>
           <LangRenderer

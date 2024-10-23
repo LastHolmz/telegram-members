@@ -2,12 +2,12 @@
 import { Sidebar, Menu, sidebarClasses } from "react-pro-sidebar";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { FaBars, FaUsersCog } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 import { useParams, usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { MdSupervisorAccount } from "react-icons/md";
 
-import { SiStatista } from "react-icons/si";
+// import { SiStatista } from "react-icons/si";
 
 import { IconType } from "react-icons/lib";
 import { CustomLink } from "@/components/ui/custom-link";

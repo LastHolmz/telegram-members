@@ -4,17 +4,18 @@ import NavigationRail, { ProfileHeader } from "./components/naviagation-rail";
 const layout = ({ children }: { children: ReactNode }) => {
   return (
     <main
-      className="flex relative flex-start gap-1 min-h-screen bg-background"
-      dir="rtl"
+    // className="flex relative flex-start gap-1 min-h-screen bg-background"
+    // dir="rtl"
     >
-      <section className="md:bg-background hidden md:block">
+      {/* <section className="md:bg-background hidden md:block">
         <NavigationRail />
       </section>
 
       <section className="w-full max-w-full">
         <ProfileHeader />
         {children}
-      </section>
+      </section> */}
+      {children}
     </main>
   );
 };

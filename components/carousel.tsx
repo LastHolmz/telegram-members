@@ -96,32 +96,33 @@ const Carousel = () => {
         />
       </h2>
 
-      <div className="flex flex-wrap justify-center items-center">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <AnimatePresence custom={currentImageIndex}>
           {images.map((image, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: index === currentImageIndex ? 1 : 0.5,
-                scale: index === currentImageIndex ? 1.2 : 1,
-                transition: { duration: 0.5 },
-              }}
-              className="flex  h-40 w-40 justify-center items-center"
-              exit={{ opacity: 0 }}
-              custom={index}
-              transition={{
-                opacity: { duration: 0.5 },
-              }}
-            >
-              <Image
-                src={image.url}
-                alt={image.alt}
-                width={200}
-                height={200}
-                className="object-contain h-16 w-16 items-center justify-center flex mx-auto"
-              />
-            </motion.div>
+            <div key={index} className=" flex justify-center items-center">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: index === currentImageIndex ? 1 : 0.5,
+                  scale: index === currentImageIndex ? 1.2 : 1,
+                  transition: { duration: 0.5 },
+                }}
+                className="flex h-40 w-40 justify-center items-center"
+                exit={{ opacity: 0 }}
+                custom={index}
+                transition={{
+                  opacity: { duration: 0.5 },
+                }}
+              >
+                <Image
+                  src={image.url}
+                  alt={image.alt}
+                  width={200}
+                  height={200}
+                  className="object-contain h-16 w-16 items-center justify-center flex mx-auto"
+                />
+              </motion.div>
+            </div>
           ))}
         </AnimatePresence>
       </div>
