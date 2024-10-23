@@ -88,7 +88,7 @@ const page = async ({
   }
 
   return (
-    <main className="bg-secondary h-full  py-2">
+    <main className="bg-secondary h-full mt-16 md:mt-24 py-2">
       <Breadcrumb className="my-2 mx-4" dir="rtl">
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -109,8 +109,7 @@ const page = async ({
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <div className="content-center container text-center h-full  w-1/2 phone-only:w-full flex flex-col justify-center  gap-2">
-        {/* {offer.} */}
+      <div className="container text-center h-3/4 w-1/2 phone-only:w-full flex flex-col justify-center  gap-2">
         <h1 className="font-bold text-xl md:text-2xl">{offer.h}</h1>
         <p className="text-sm text-foreground/80">{offer.desc}</p>
         <Separator className=" bg-primary my-2" />

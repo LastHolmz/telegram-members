@@ -6,106 +6,132 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
-  BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { getAccounts } from "@/db/accounts";
-import { accountsTable } from "./components/accounts-column";
+import { arAccountsTable, enAccountsTable } from "./components/accounts-column";
 import { CustomLink } from "@/components/ui/custom-link";
-import { revalidateTag } from "next/cache";
 import { getSession } from "@/lib/auth";
 import { getUserById } from "@/db/users";
+import LangBreadcrumbSeparator from "@/app/[lang]/components/breadcrumb-separator";
+import LangRenderer from "@/app/[lang]/components/lang";
+import { Lang } from "@/types";
+
 const page = async ({
   searchParams,
   params: { lang },
 }: {
   searchParams: { content?: string };
-  params: { lang: string };
+  params: { lang: Lang };
 }) => {
   const session = await getSession();
   if (!session) {
     return (
       <div className="h-screen w-full content-center">
-        يجب تسجيل الدخول اولا
+        <LangRenderer ar="يجب تسجيل الدخول اولا" en="You must log in first" />
       </div>
     );
   }
+
   const user = await getUserById(session.id);
 
   if (!user) {
     return (
       <div className="h-screen w-full content-center">
-        لا يوجد حساب بهذا المعرف
+        <LangRenderer
+          ar="لا يوجد حساب بهذا المعرف"
+          en="No account found with this ID"
+        />
       </div>
     );
   }
+
   if (!user.Subscription) {
     return (
       <div className=" h-[80%]">
-        <Breadcrumb className="my-2" dir="rtl">
+        <Breadcrumb className="my-2">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href={`/${lang}`}>الرئيسية</Link>
+                <Link href={`/${lang}`}>
+                  <LangRenderer ar="الرئيسية" en="Home" />
+                </Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbSeparator />
+            <LangBreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href={`/${lang}/profile`}>الملف الشخصي</Link>
+                <Link href={`/${lang}/profile`}>
+                  <LangRenderer ar="الملف الشخصي" en="My Profile" />
+                </Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbSeparator />
+            <LangBreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage>ادارة الحسابات</BreadcrumbPage>
+              <BreadcrumbPage>
+                <LangRenderer ar="ادارة الحسابات" en="Manage Accounts" />
+              </BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
         <div className="content-center h-full w-fit mx-auto text-center grid gap-3">
-          <div>لا يمكنك اضافة حسابات</div>
+          <LangRenderer
+            ar="لا يمكنك اضافة حسابات"
+            en="You cannot add accounts"
+          />
           <CustomLink href={`/${lang}#pricing`} scroll>
-            الإشتراكات
+            <LangRenderer ar="الإشتراكات" en="Subscriptions" />
           </CustomLink>
         </div>
       </div>
     );
   }
+
   const accounts = await getAccounts({
     phoneNumber: searchParams?.content,
     userId: user.id,
   });
+
   return (
     <main className="phone-only:px-4">
-      <div className=" flex md:justify-between  justify-start flex-col  md:flex-row md:items-center md:mx-2 my-2">
-        <Breadcrumb className="my-2" dir="rtl">
+      <div className="flex md:justify-between justify-start flex-col md:flex-row md:items-center md:mx-2 my-2">
+        <Breadcrumb className="my-2">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href={`/${lang}`}>الرئيسية</Link>
+                <Link href={`/${lang}`}>
+                  <LangRenderer ar="الرئيسية" en="Home" />
+                </Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbSeparator />
+            <LangBreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href={`/${lang}/profile`}>الملف الشخصي</Link>
+                <Link href={`/${lang}/profile`}>
+                  <LangRenderer ar="الملف الشخصي" en="My Profile" />
+                </Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbSeparator />
+            <LangBreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage>ادارة الحسابات</BreadcrumbPage>
+              <BreadcrumbPage>
+                <LangRenderer ar="ادارة الحسابات" en="Manage Accounts" />
+              </BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
         <CustomLink href={`/${lang}/profile/accounts/new`}>
-          حساب جديد
+          <LangRenderer ar="حساب جديد" en="New Account" />
         </CustomLink>
       </div>
-      <div className=" my-4 md:container">
-        <Suspense fallback={"جاري التحميل"}>
+      <div className="my-4 md:container">
+        <Suspense fallback={<LangRenderer ar="جاري التحميل" en="Loading" />}>
           <AccountsTable
-            searchPlaceholder="البحث برقم الهاتف"
+            searchPlaceholder={
+              lang === "ar" ? "البحث برقم الهاتف" : "Search by phone number"
+            }
             data={accounts}
-            columns={accountsTable}
+            columns={lang === "ar" ? arAccountsTable : enAccountsTable}
             searchQuery="content"
           />
         </Suspense>

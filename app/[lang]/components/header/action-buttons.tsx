@@ -53,15 +53,17 @@ const ActionButtons = () => {
                   <Link href="/">
                     <LangRenderer en={`About`} ar={`حولنا`} />
                   </Link>
-                  {user && user.role === "user" ? (
+                  {user && user.role === "user" && (
                     <Link href={`/${lang}/profile`}>
                       <LangRenderer en={`profile`} ar={`الملف الشخصي`} />
                     </Link>
-                  ) : (
+                  )}
+                  {user && user.role !== "user" && (
                     <Link href={`/${lang}/dashboard`}>
                       <LangRenderer en={`dashboard`} ar={`لوحة التحكم`} />
                     </Link>
                   )}
+
                   {user && (
                     <LogoutForm>
                       <Button variant={"secondary"}>تسجيل الخروج</Button>

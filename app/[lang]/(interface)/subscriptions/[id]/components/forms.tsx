@@ -18,6 +18,9 @@ import { CiWarning } from "react-icons/ci";
 import { subscribeAction } from "../actions";
 import { Input } from "@/components/ui/input";
 import SubmitButton from "@/reusable-components/submit-button";
+import { CustomLink } from "@/components/ui/custom-link";
+import { useParams } from "next/navigation";
+import LangRenderer from "@/app/[lang]/components/lang";
 
 export const SubscribeForm = ({
   user,
@@ -32,13 +35,7 @@ export const SubscribeForm = ({
     type: OfferType;
   };
 }) => {
-  /* 
-          price: z.string(),
-      allowedAccounts: z.string(),
-      type: z.enum(["basic", "sponsered", "premium"]),
-      userId: z.string(), // "InvaluserId user userId"
-
-    */
+  const { lang } = useParams();
   const { user: auth } = useAuth();
   const [open, setOpen] = useState(true);
   if (!auth) {
@@ -63,7 +60,7 @@ export const SubscribeForm = ({
   }
   if (subscription && subscription.valid) {
     return (
-      <Dialog open={open} defaultOpen onOpenChange={() => setOpen(!open)}>
+      <Dialog>
         <DialogTrigger asChild>
           <Button>اشترك</Button>
         </DialogTrigger>
@@ -76,7 +73,14 @@ export const SubscribeForm = ({
               {"انت على وشك الغاء الباقة و بدء في باقة جديدة"}
             </DialogDescription>
           </DialogHeader>
-          {/* content */}
+          <CustomLink
+            href={`/${lang}/profile#subscription-info`}
+            scroll
+            className="w-full"
+            variant={"secondary"}
+          >
+            <LangRenderer ar="الغاء الإشتراك" en="cancel subscriptoin" />
+          </CustomLink>
         </DialogContent>
       </Dialog>
     );

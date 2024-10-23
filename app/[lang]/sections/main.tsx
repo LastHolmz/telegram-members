@@ -10,7 +10,7 @@ const MainSection = async ({
   const dictionary = await getDictionary(lang);
 
   return (
-    <section className="md:py-20 py-16 flex justify-center items-center bg-gradient-to-r min-h-screen from gray-00 to-gray-200 spacey-10">
+    <section className="md:py-20 py-16 flex justify-center bg-background items-center bg-gradient-to-r min-h-screen from gray-00 to-gray-200 spacey-10">
       <div className="container mx-auto text-center mt-10">
         <h1 className="text-4xl md:text-6xl flex justify-center font-bold md:px-20 pb-10 text-gradient bg-gradient-to-r from-primary to-gradaint bg-clip-text text-transparent">
           {dictionary.main.heading}

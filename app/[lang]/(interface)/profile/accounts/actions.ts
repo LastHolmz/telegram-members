@@ -45,6 +45,7 @@ export async function loginAction(
       phoneCodeHash: z.string(),
       phoneNumber: z.string(),
       phoneCode: z.string(),
+      ownerId: z.string(),
       password: z.string().optional().nullable(),
     });
     console.log(`schema: ${schema}`);
@@ -53,6 +54,7 @@ export async function loginAction(
       password: formData.get("password"),
       phoneCode: formData.get("phoneCode"),
       phoneNumber: formData.get("phoneNumber"),
+      ownerId: formData.get("ownerId"),
       phoneCodeHash: formData.get("phoneCodeHash"),
     });
     console.log(data);
@@ -62,12 +64,14 @@ export async function loginAction(
       return { message: "يجب أن يتم ملء جميع الحقول" };
     }
     console.log(data);
-    const { phoneCode, phoneCodeHash, phoneNumber, password } = data.data;
+    const { phoneCode, phoneCodeHash, phoneNumber, password, ownerId } =
+      data.data;
     const res = await verifyCodeAndPassword({
       phoneCode,
       phoneCodeHash,
       phoneNumber,
       password: password === null ? undefined : password,
+      ownerId,
     });
     return { message: res.message };
   } catch (e) {

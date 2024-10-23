@@ -61,3 +61,38 @@ export const createSubscription = async ({
     return { message: "حدث خطأ غير معروف الرجاء المحاولة لاحقا" };
   }
 };
+export const cancelSubscription = async ({
+  subscriptionId,
+  userId,
+}: {
+  subscriptionId: string;
+  userId: string;
+}): Promise<{ message: string }> => {
+  try {
+    const updatedSub = await prisma.subscription.update({
+      where: { id: subscriptionId },
+      data: {
+        valid: false,
+        User: {
+          update: {
+            insertedAccounts: undefined,
+          },
+          disconnect: {
+            id: userId,
+          },
+        },
+      },
+    });
+    if (!updatedSub) {
+      return { message: "حدث خطأ أثناء الغاء القيمة" };
+    }
+    revalidateTag("subscriptions");
+    revalidateTag("users");
+    return {
+      message: "تم الغاء الاشتراك بنجاح",
+    };
+  } catch (error) {
+    console.log(error);
+    return { message: "حدث خطأ غير معروف الرجاء المحاولة لاحقا" };
+  }
+};

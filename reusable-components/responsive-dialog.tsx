@@ -20,6 +20,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { useParams } from "next/navigation";
 interface Props {
   children?: ReactNode;
   trigger: ReactNode;
@@ -36,7 +37,7 @@ export default function ResponsiveDialog({
 }: Props) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
-
+  const { lang } = useParams();
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
@@ -58,7 +59,7 @@ export default function ResponsiveDialog({
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
       <DrawerContent className="px-2">
-        <DrawerHeader className="text-right">
+        <DrawerHeader>
           {title && <DrawerTitle>{title}</DrawerTitle>}
           {description && <DrawerDescription>{description}</DrawerDescription>}
         </DrawerHeader>
@@ -67,7 +68,7 @@ export default function ResponsiveDialog({
           <DrawerFooter className="pt-2">
             <DrawerClose asChild>
               <Button variant="outline" className="w-full">
-                إلغاء
+                {lang === "ar" ? "إلغاء" : "cancel"}
               </Button>
             </DrawerClose>
           </DrawerFooter>

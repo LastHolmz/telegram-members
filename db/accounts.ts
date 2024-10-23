@@ -6,6 +6,7 @@ import { env } from "process";
 import { TelegramClient, Api } from "telegram";
 import { computeCheck } from "telegram/Password";
 import { StringSession } from "telegram/sessions";
+import { getUserById } from "./users";
 const apiId = Number(env.API_ID);
 const apiHash = String(env.API_HASH);
 const stringSession = new StringSession("");
@@ -94,11 +95,13 @@ export const verifyCodeAndPassword = async ({
   phoneCode,
   phoneCodeHash,
   password,
+  ownerId,
 }: {
   phoneNumber: string;
   phoneCode: string;
   phoneCodeHash: string;
   password?: string;
+  ownerId: string;
 }): Promise<{ message: string }> => {
   const client = new TelegramClient(stringSession, apiId, apiHash, {
     connectionRetries: 5,
@@ -107,6 +110,16 @@ export const verifyCodeAndPassword = async ({
   await client.connect();
 
   try {
+    const user = await getUserById(ownerId);
+    if (!user) {
+      return { message: "هذا المستخدم لم يعد متاح" };
+    }
+    if (!user?.Subscription) {
+      return { message: "يجب الاشتراك لإضافة حساب" };
+    }
+    if (user.insertedAccounts >= user.Subscription.allowedAccounts) {
+      return { message: "لقد تجاوزت العدد المسموح به" };
+    }
     // Attempt sign-in with phone number and code
     const result = await client.invoke(
       new Api.auth.SignIn({
@@ -115,18 +128,20 @@ export const verifyCodeAndPassword = async ({
         phoneCodeHash,
       })
     );
-
+    let accId;
+    if ("user" in result) {
+      accId = Number(result.user.id);
+    }
     // Serialize the session after connecting to the Telegram client
     const serializedSession = stringSession.save();
 
     // Save the session to your database
-
     await prisma.telegramAccount.create({
       data: {
-        accId: 11,
+        accId: accId ?? 111111,
         phoneNumber,
         session: serializedSession,
-        ownerId: "me",
+        ownerId,
         password,
       },
     });
@@ -145,7 +160,7 @@ export const verifyCodeAndPassword = async ({
         const srpPassword = await computeCheck(passwordInfo, password);
 
         // Invoke the CheckPassword method
-        await client.invoke(
+        const result = await client.invoke(
           new Api.auth.CheckPassword({
             password: srpPassword,
           })
@@ -154,13 +169,17 @@ export const verifyCodeAndPassword = async ({
         // Serialize the session after successful password verification
         const serializedSession = stringSession.save();
 
+        let accId;
+        if ("user" in result) {
+          accId = Number(result.user.id);
+        }
         // Update the session in the database
         await prisma.telegramAccount.create({
           data: {
-            accId: 11,
+            accId: accId ?? 111111,
             phoneNumber,
             session: serializedSession,
-            ownerId: "me",
+            ownerId,
             password,
           },
         });

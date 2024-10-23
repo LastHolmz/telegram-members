@@ -76,7 +76,7 @@ const AccessibleDialogForm = ({
       description={description}
       title={title}
     >
-      <form dir="rtl" action={dispatch} className={cn(className)}>
+      <form action={dispatch} className={cn(className)}>
         {children}
       </form>
     </ResponsiveDialogWithCustomOpenFuncionality>

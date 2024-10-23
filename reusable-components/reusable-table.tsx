@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/table";
 import SearchInput from "./search";
 import { cn } from "@/lib/utils";
+import LangRenderer from "@/app/[lang]/components/lang";
 
 export default function ReusableTable<T>({
   data = [],
@@ -84,7 +85,7 @@ export default function ReusableTable<T>({
   });
 
   return (
-    <div className={cn("w-full", className)} dir="rtl">
+    <div className={cn("w-full", className)}>
       <div className="flex flex-col gap-2 my-2 md:flex-row justify-between items-center py-4">
         {showSearch && (
           <SearchInput
@@ -95,10 +96,11 @@ export default function ReusableTable<T>({
         )}
 
         <div className="w-full sm:w-auto gap-1">
-          <DropdownMenu dir="rtl">
+          <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="w-full sm:w-auto">
-                الأعمدة <ChevronDown className="mx-3 w-6 h-6" />
+                <LangRenderer ar="الأعمدة" en="columns" />{" "}
+                <ChevronDown className="mx-3 w-6 h-6" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="center">
@@ -152,7 +154,11 @@ export default function ReusableTable<T>({
                 <TableRow
                   className="hover:bg-secondary"
                   key={row.id}
-                  data-state={row.getIsSelected() && "مختارة"}
+                  data-state={
+                    row.getIsSelected() && (
+                      <LangRenderer ar="مختارة" en="selected" />
+                    )
+                  }
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -170,7 +176,7 @@ export default function ReusableTable<T>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  لا توجد نتائج
+                  <LangRenderer ar="لا توجد نتائج" en="No Results" />
                 </TableCell>
               </TableRow>
             )}
@@ -180,8 +186,10 @@ export default function ReusableTable<T>({
 
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} من{" "}
-          {table.getFilteredRowModel().rows.length} تم اختيار.
+          {table.getFilteredSelectedRowModel().rows.length}{" "}
+          <LangRenderer ar="من" en="from" />{" "}
+          {table.getFilteredRowModel().rows.length}{" "}
+          <LangRenderer ar="تم اختيار." en="selected" />
         </div>
         <div className="space-x-2">
           <Button
@@ -190,7 +198,7 @@ export default function ReusableTable<T>({
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            السابق{" "}
+            <LangRenderer ar="السابق" en="prev" />
           </Button>
           <Button
             variant="outline"
@@ -198,7 +206,7 @@ export default function ReusableTable<T>({
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            التالي
+            <LangRenderer ar="التالي" en="next" />
           </Button>
         </div>
       </div>

@@ -12,12 +12,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Link from "next/link";
 import { toast } from "@/hooks/use-toast";
 import { TelegramAccount } from "@prisma/client";
 import { DeleteAccountForm } from "./forms";
 
-export const accountsTable: ColumnDef<TelegramAccount>[] = [
+export const arAccountsTable: ColumnDef<TelegramAccount>[] = [
   {
     accessorKey: "اسم المستخدم",
     header: "اسم المستخدم",
@@ -54,30 +53,6 @@ export const accountsTable: ColumnDef<TelegramAccount>[] = [
       }
     },
   },
-  // {
-  //   accessorKey: "البريد",
-  //   header: "البريد",
-  //   cell: ({ row }) => {
-  //     if (row) {
-  //       const email = row.original?.email;
-  //       return <div>{email}</div>;
-  //     } else {
-  //       <div>لايوجد</div>;
-  //     }
-  //   },
-  // },
-  // {
-  //   accessorKey: "المحتوى",
-  //   header: "المحتوى",
-  //   cell: ({ row }) => {
-  //     if (row) {
-  //       const content = row.original?.content;
-  //       return <div>{content.substring(0, 200)}</div>;
-  //     } else {
-  //       <div>لايوجد</div>;
-  //     }
-  //   },
-  // },
 
   {
     id: "actions",
@@ -106,16 +81,82 @@ export const accountsTable: ColumnDef<TelegramAccount>[] = [
             >
               نسح رقم الهاتف
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link
-                // variant={"ghost"}
-                className="w-full justify-around"
-                // size={"sm"}
-                href={`/dashboard/products/${account.id}/update`}
-              >
-                تحديث المنتج
-              </Link>
+
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+              <DeleteAccountForm account={account} />
             </DropdownMenuItem>
+            <DropdownMenuSeparator />
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    },
+  },
+];
+export const enAccountsTable: ColumnDef<TelegramAccount>[] = [
+  {
+    accessorKey: "username",
+    header: "username",
+    cell: ({ row }) => {
+      if (row) {
+        const username = row.original?.username;
+        return <div>{username ?? "لايوجد"}</div>;
+      } else {
+        <div>لايوجد</div>;
+      }
+    },
+  },
+  {
+    accessorKey: "phone",
+    header: "phone",
+    cell: ({ row }) => {
+      if (row) {
+        const phone = row.original?.phoneNumber;
+        return <div>{phone}</div>;
+      } else {
+        <div>لايوجد</div>;
+      }
+    },
+  },
+  {
+    accessorKey: "id",
+    header: "id",
+    cell: ({ row }) => {
+      if (row) {
+        const id = row.original?.accId;
+        return <div>{id}</div>;
+      } else {
+        <div>لايوجد</div>;
+      }
+    },
+  },
+  {
+    id: "actions",
+    header: "actions",
+    enableHiding: false,
+    cell: ({ row }) => {
+      const account = row.original;
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">opne actions</span>
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>الأحداث</DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() => {
+                navigator.clipboard.writeText(String(account.phoneNumber));
+                toast({
+                  className: "bg-primary text-white",
+                  description: "phone number copied",
+                });
+              }}
+            >
+              copy phone
+            </DropdownMenuItem>
+
             <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
               <DeleteAccountForm account={account} />
             </DropdownMenuItem>

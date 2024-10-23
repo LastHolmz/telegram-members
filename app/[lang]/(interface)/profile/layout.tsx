@@ -1,20 +1,32 @@
 import React, { ReactNode } from "react";
-import NavigationRail, { ProfileHeader } from "./components/naviagation-rail";
+import NavigationTabs, {
+  HomeTabLink,
+  TabLink,
+} from "../../components/navigation-tabs";
 
-const layout = ({ children }: { children: ReactNode }) => {
+const layout = ({
+  children,
+  params: { lang },
+}: {
+  children: ReactNode;
+  params: { lang: string };
+}) => {
   return (
-    <main
-    // className="flex relative flex-start gap-1 min-h-screen bg-background"
-    // dir="rtl"
-    >
-      {/* <section className="md:bg-background hidden md:block">
-        <NavigationRail />
-      </section>
-
-      <section className="w-full max-w-full">
-        <ProfileHeader />
-        {children}
-      </section> */}
+    <main className="mt-16 md:mt-24">
+      <NavigationTabs className="my-1">
+        <HomeTabLink
+          href={`/${lang}/profile`}
+          content={lang === "ar" ? "عام" : "general"}
+        />
+        <TabLink
+          href={`/${lang}/profile/accounts`}
+          content={lang === "ar" ? "حساباتي" : "accounts"}
+        />
+        <TabLink
+          href={`/${lang}/profile/groups`}
+          content={lang === "ar" ? "مجموعاتي" : "groups"}
+        />
+      </NavigationTabs>
       {children}
     </main>
   );

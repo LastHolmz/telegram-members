@@ -21,6 +21,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { CustomLink } from "@/components/ui/custom-link";
 import AccessibleDialogForm from "@/reusable-components/accible-dialog-form";
 import { TelegramAccount } from "@prisma/client";
+import LangRenderer from "@/app/[lang]/components/lang";
 
 export function InputOTPPattern({
   setValue,
@@ -51,7 +52,8 @@ const initState = {
   message: "",
   phoneCodeHash: "",
 };
-export const SendCodeForm = () => {
+
+export const SendCodeForm = ({ ownerId }: { ownerId: string }) => {
   const [content, dispatch] = useFormState(sendCodeActoin, initState);
   const [PassContent, PassDispatch] = useFormState(loginAction, initState);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -64,6 +66,25 @@ export const SendCodeForm = () => {
   const [changeState, setChangeState] = useState(false);
   const router = useRouter();
   const { lang } = useParams();
+
+  const translations = {
+    en: {
+      phoneInputLabel: "Enter your phone number",
+      submitOtpButton: "Login",
+      requestCodeButton: "Request verification code",
+      passwordLabel: "Password",
+      loginButton: "Login",
+    },
+    ar: {
+      phoneInputLabel: "ادخل رقمك",
+      submitOtpButton: "تسجيل الدخول",
+      requestCodeButton: "طلب رمز التحقق",
+      passwordLabel: "كلمة السر",
+      loginButton: "تسجيل الدخول",
+    },
+  };
+
+  const t = lang === "ar" ? translations.ar : translations.en;
 
   const handlePhoneChange = (value: string) => {
     setPhoneNumber(value);
@@ -90,7 +111,7 @@ export const SendCodeForm = () => {
   }, [content, phoneCodeHash, needPassword, changeState, PassContent]);
 
   return (
-    <div className="w-full h-full bg-secondary relative px-4 py-10 rounded-md min-h-72 flex  flex-col justify-center items-center">
+    <div className="w-full h-full bg-secondary relative px-4 py-10 rounded-md min-h-72 flex flex-col justify-center items-center">
       {phoneCodeHash && phoneCodeHash.length > 0 && (
         <CustomLink
           href={`/${lang}/profile/accounts`}
@@ -105,20 +126,19 @@ export const SendCodeForm = () => {
       {phoneCodeHash && phoneCodeHash.length > 1
         ? !needPassword && (
             <div dir="ltr">
-              <form action={PassDispatch} className=" grid gap-2">
+              <form action={PassDispatch} className="grid gap-2">
                 <InputOTPPattern value={otp} setValue={setOtp} />
                 <SubmitButton
                   onClick={() => {
-                    // e.preventDefault();
                     setChangeState(!changeState);
-                    console.log(content.message);
-                    console.log(changeState);
+                    // console.log(content.message);
+                    // console.log(changeState);
                   }}
                 >
-                  تسجيل الدخول
+                  {t.submitOtpButton}
                 </SubmitButton>
+                <Input type={"hidden"} name="ownerId" value={ownerId} />
                 <Input type={"hidden"} name="phoneCode" value={otp} />
-
                 <Input
                   type={"hidden"}
                   name="phoneCodeHash"
@@ -132,23 +152,25 @@ export const SendCodeForm = () => {
             <div>
               <form action={dispatch}>
                 <div>
-                  <Label>ادخل رقمك</Label>
+                  <Label>{t.phoneInputLabel}</Label>
                   <CustomPhoneInput
                     value={phoneNumber}
                     onChange={handlePhoneChange}
                   />
                   <Input type="hidden" name="phoneNumber" value={phoneNumber} />
                 </div>
-                <SubmitButton>طلب رمز التحقق</SubmitButton>
+                <SubmitButton>{t.requestCodeButton}</SubmitButton>
               </form>
             </div>
           )}
       {needPassword && (
         <div>
           <form action={PassDispatch}>
-            <Label htmlFor="password">كلمة السر</Label>
+            <Input type={"hidden"} name="ownerId" value={ownerId} />
+
+            <Label htmlFor="password">{t.passwordLabel}</Label>
             <Input type="password" name="password" id="password" />
-            <SubmitButton>تسجيل الدخول</SubmitButton>
+            <SubmitButton>{t.loginButton}</SubmitButton>
             <Input type={"hidden"} name="phoneCode" value={otp} />
             <Input
               type={"hidden"}
@@ -159,7 +181,6 @@ export const SendCodeForm = () => {
           </form>
         </div>
       )}
-      {/* <span className="my-2 text-sm">{content.message}</span> */}
       <span className="my-2 text-sm">
         {phoneCodeHash && phoneCodeHash.length > 1
           ? PassContent.message
@@ -196,15 +217,51 @@ export const DeleteAccountForm = ({
 }: {
   account: TelegramAccount;
 }) => {
+  const translations = {
+    en: {
+      trigger: "Logout",
+      title: `Logout ${account.phoneNumber}`,
+      description:
+        "Are you sure you want to log out? You won't be able to access this account until you log in again.",
+      submitButton: "Logout",
+    },
+    ar: {
+      trigger: "تسجيل الخروج",
+      title: `تسجيل الخروج ${account.phoneNumber}`,
+      description:
+        "هل انت متأكد من تسجيل الخروج, لا يمكنك العودة الى الحساب حتى تجيل الدخول ثانية",
+      submitButton: "تسجيل الخروج",
+    },
+  };
+  const { lang } = useParams();
   return (
     <AccessibleDialogForm
       action={deleteAccountAction}
-      trigger={<button>تسجيل الخروج</button>}
-      title={`تسجيل الخروج ${account.phoneNumber}`}
-      description="هل انت متأكد من تسجيل الخروج, لا يمكنك العودة الى الحساب حتى تجيل الدخول ثانية"
+      trigger={
+        <button>
+          {" "}
+          <LangRenderer
+            ar={translations.ar.trigger}
+            en={translations.en.trigger}
+          />
+        </button>
+      }
+      title={`${
+        lang === "ar" ? translations.ar.title : translations.en.title
+      } ${account.phoneNumber}`}
+      description={
+        lang === "ar"
+          ? translations.ar.description
+          : translations.ar.description
+      }
     >
       <Input type={"hidden"} name="id" value={account.id} />
-      <SubmitButton>تسجيل الخروج</SubmitButton>
+      <SubmitButton>
+        <LangRenderer
+          ar={translations.ar.submitButton}
+          en={translations.en.submitButton}
+        />
+      </SubmitButton>
     </AccessibleDialogForm>
   );
 };

@@ -33,6 +33,9 @@ model User {
   subscriptionId              String?       @unique @db.ObjectId
   Voucher                     Voucher[]
   faildAttempsToChargeVoucher Int           @default(0)
+
+  // edit when sub
+  insertedAccounts Int @default(0)
 }
 
 model Subscription {
